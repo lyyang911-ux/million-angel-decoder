@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>百万天使 · 天赋解码 | Million Angel · Talent Decoder</title>
 <meta name="description" content="2 分钟解码你的个人天赋 / Decode your talents in 2 minutes">
-<meta name="theme-color" content="#D3222E">
+<meta name="theme-color" content="#B81C26">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Talent Decoder">
@@ -14,15 +14,15 @@
 <link rel="icon" href="assets/icon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <style>
-:root{--red:#D3222E;--red-d:#9C1820;--gold:#F2C14E;--ink:#2A1A10;--bg:#FBF3F1;--mut:#7A6159;--glass:rgba(255,255,255,.62);--bd:rgba(255,255,255,.85);--r:22px;
+:root{--red:#B81C26;--red-d:#8E1520;--gold:#B8913F;--gold-l:#D9BE7C;--ink:#2A1A10;--bg:#FBF5E8;--mut:#7A6652;--glass:rgba(255,252,243,.78);--bd:#D9BE7C;--r:6px;
  --f:"Times New Roman","Songti SC","Noto Serif SC","STSong",SimSun,serif}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{background:var(--bg)}
 body{margin:0;min-height:100vh;font-family:var(--f);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.5;overflow-x:hidden}
 .blob{position:fixed;border-radius:50%;filter:blur(46px);z-index:-1;pointer-events:none}
-.b1{width:300px;height:300px;background:rgba(242,193,78,.45);top:-70px;right:-70px}
-.b2{width:360px;height:360px;background:rgba(211,34,46,.16);bottom:-120px;left:-120px}
-.b3{width:200px;height:200px;background:rgba(211,34,46,.10);top:42%;right:-60px}
+.b1{width:300px;height:300px;background:rgba(184,145,63,.28);top:-70px;right:-70px}
+.b2{width:360px;height:360px;background:rgba(142,21,32,.08);bottom:-120px;left:-120px}
+.b3{width:200px;height:200px;background:rgba(184,145,63,.14);top:42%;right:-60px}
 #app{max-width:1100px;margin:0 auto;padding:0 16px calc(24px + env(safe-area-inset-bottom))}
 .top{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 0 10px;gap:10px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{height:46px;width:auto;border-radius:8px}.bname{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -86,6 +86,32 @@ input:focus,select:focus{outline:2px solid var(--red);outline-offset:1px}
 #toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;z-index:9}#toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:820px){.rwrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr);gap:18px;align-items:start}aside{position:sticky;top:10px}h1{font-size:44px}.glass{padding:26px}}
 @media(max-width:380px){.bname{display:none}.row3{grid-template-columns:1fr 1fr 1.2fr}}
+
+/* ---- classic certificate look for the report ---- */
+.report{padding:12px;border:2px solid var(--red-d);outline:1.5px solid var(--gold);outline-offset:-8px;background:var(--bg);box-shadow:0 10px 34px rgba(142,21,32,.12);-webkit-backdrop-filter:none;backdrop-filter:none}
+.rh{display:flex;align-items:center;gap:14px;flex-wrap:nowrap;background:var(--red-d);color:#FFF6DD;padding:20px 16px;margin:10px 10px 0;position:relative;outline:1.5px solid var(--gold-l);outline-offset:-7px;border-bottom:5px double var(--gold)}
+.med{flex:none;width:104px;height:104px;border-radius:50%;background:var(--bg);border:3px solid var(--gold);box-shadow:0 0 0 4px var(--red-d),0 0 0 5.5px var(--gold-l);display:grid;place-items:center;overflow:hidden}
+.med .angel.mid{width:70px;margin-top:8px}
+.rmeta{flex:1;min-width:0}.rmeta small{letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);font-size:11px;display:block}
+.rname{font-size:30px;margin:4px 0;color:#FFF6DD;display:block}.pill{background:none;color:var(--gold-l);font-style:italic;font-weight:400;font-size:18px;padding:0;border-radius:0}
+.ringw{width:104px;flex:none;text-align:center}.ringw small{color:var(--gold-l);font-style:italic;font-size:12.5px;display:block;margin-top:-2px}.seal{width:104px;height:104px;display:block}
+.pn{margin:14px 10px 0;padding:6px 22px 14px;background:#F6ECD6;border:1.5px solid var(--gold-l);outline:1px solid var(--gold);outline-offset:-6px;position:relative}
+.report h3{display:flex;align-items:center;justify-content:center;gap:14px;font-size:17px;letter-spacing:.14em;color:var(--red-d);margin:14px 0 12px}
+.report h3:before,.report h3:after{content:"";flex:1;height:1.5px;background:var(--gold);opacity:.7}
+.report h3 i{display:none}
+.report h3{text-align:center}.pn h3{position:relative}
+.dots li{padding:5px 0 5px 24px;font-size:16px;line-height:1.55}.dots li:before{content:"";border-radius:0;transform:rotate(45deg);width:8px;height:8px;top:14px;left:4px;background:var(--red)}.dots.gold li:before{background:var(--gold)}
+.roman{list-style:none;margin:0;padding:0;counter-reset:rn}.roman li{counter-increment:rn;position:relative;padding:6px 0 6px 46px;font-size:16px;line-height:1.55}
+.roman li:before{content:counter(rn,upper-roman);position:absolute;left:0;top:6px;width:34px;height:34px;border-radius:50%;background:var(--red-d);color:#FFF6DD;box-shadow:inset 0 0 0 2px var(--red-d),inset 0 0 0 3.5px var(--gold-l);display:grid;place-items:center;font-weight:700;font-size:13px}
+.tips{display:grid;gap:2px}.tip{display:flex;gap:12px;align-items:flex-start;background:none;border:0;border-bottom:1px solid var(--gold-l);border-radius:0;padding:10px 0}.tip:last-child{border-bottom:0}
+.tip p{margin:2px 0 0;font-size:15.5px;line-height:1.55}.tip b{color:var(--red-d);font-size:16.5px}
+.tb{width:36px;height:36px;border-radius:50%;background:var(--red-d);color:#FFF6DD;box-shadow:inset 0 0 0 2px var(--red-d),inset 0 0 0 3.5px var(--gold-l);display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
+.cta{margin:14px 10px 0;background:var(--red-d);border-radius:0;outline:1.5px solid var(--gold-l);outline-offset:-7px;padding:24px 20px;text-align:center;color:#FFF6DD}
+.cta p{font-size:16px}.cta .btn.wa{background:#FFF6DD;color:var(--red-d)}
+.sig{font-style:italic;font-weight:700;margin:18px 0 4px}.sig:before{content:"◆  ";color:var(--gold)}.sig:after{content:"  ◆";color:var(--gold)}
+.disc{padding:0 14px 12px}
+.btn,.dot,.chip,.seg button,input,select{border-radius:6px}
+@media(max-width:420px){.med{width:84px;height:84px}.med .angel.mid{width:56px}.seal,.ringw{width:84px;height:auto}.seal{height:84px}.rname{font-size:24px}.rh{gap:10px;padding:16px 10px}}
 </style>
 </head>
 <body>
@@ -230,7 +256,7 @@ function buildReport(a,lang){
     strengths[1]=strengths[1].replace(/[。.]$/,'')+(L?` (${mb}: ${bits}).`:`（${mb}：${bits}）。`); }
   // watch-outs (positive framing)
   const watch=[p(lp[6]),p(zd[2])];
-  const style=[]; if(ds) style.push(`DISC ${p([ds.zh,ds.en])} · ${p(ds.d)}. ${p(ds.tip)}`); if(mb) style.push(`MBTI ${mb}`);
+  const style=[]; // DISC / MBTI now appear as their own lines under 'how your traits work'
   // how it plays out in our industry
   const links=[
     [L?`Number ${a.lp} with clients`:`${a.lp} 号人见客户`,p(lp[7])],
@@ -260,7 +286,7 @@ function buildReport(a,lang){
 
 /* ===== canvas renderer (PNG 1080x1350, PDF A4) — no libraries ===== */
 const FONT='"Times New Roman","Songti SC","Noto Serif SC","STSong",SimSun,serif';
-const C={red:'#D3222E',redD:'#9C1820',gold:'#F2C14E',ink:'#2A1A10',bg:'#FBF3F1',mut:'#7A6159',card:'rgba(255,255,255,.78)',line:'rgba(211,34,46,.16)'};
+const C={red:'#B81C26',redD:'#8E1520',gold:'#B8913F',goldL:'#D9BE7C',ink:'#2A1A10',bg:'#FBF5E8',mut:'#7A6652'};
 let _angelImg=null,_logoImg=undefined;
 function loadImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src;});}
 async function getAngel(){ if(!_angelImg) _angelImg=await loadImg('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(ANGEL_RAW)); return _angelImg; }
@@ -268,76 +294,94 @@ async function getLogo(){ if(_logoImg===undefined) _logoImg=await loadImg('asset
 function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 function wrap(c,text,maxW){
   const toks=text.match(/[　-鿿＀-￯]|[^\s　-鿿＀-￯]+|\s+/g)||[]; const lines=[]; let cur='';
-  for(const t of toks){ const test=cur+t; if(c.measureText(test).width>maxW&&cur.trim()){ lines.push(cur.trim()); cur=t.trim()?t:''; } else cur=test; }
+  for(const t of toks){ const test=cur+t; if(/^[，。、；：！？）」』,.;:!?)]$/.test(t)){ cur=test; continue; } if(c.measureText(test).width>maxW&&cur.trim()){ lines.push(cur.trim()); cur=t.trim()?t:''; } else cur=test; }
   if(cur.trim()) lines.push(cur.trim()); return lines;
 }
-function layout(c,r,draw,W,imgs){
-  const P=56, IW=W-2*P; let y=44;
-  const txt=(s,x,yy,font,col,al)=>{c.font=font;c.fillStyle=col;c.textAlign=al||'left';c.fillText(s,x,yy);};
-  // ---- header
-  if(draw){
-    const h=232,w=h*80/108; if(imgs.angel) c.drawImage(imgs.angel,P-6,y+2,w,h);
-    if(imgs.logo){ const lh=62,lw=imgs.logo.width/imgs.logo.height*lh; c.save(); rrect(c,P+w+14,y,lw,lh,10); c.clip(); c.drawImage(imgs.logo,P+w+14,y,lw,lh); c.restore(); }
-    txt(r.t.app,P+w+14,y+(imgs.logo?96:44),`600 24px ${FONT}`,C.red);
-    c.font=`bold 56px ${FONT}`; let nm=r.name; while(c.measureText(nm).width>470&&nm.length>2) nm=nm.slice(0,-1); if(nm!==r.name) nm+='…';
-    txt(nm,P+w+14,y+(imgs.logo?156:112),`bold 56px ${FONT}`,C.ink);
-    c.font=`bold 26px ${FONT}`; const tw=c.measureText(r.tag).width+44, py=y+(imgs.logo?178:140);
-    c.fillStyle=C.red; rrect(c,P+w+14,py,tw,46,23); c.fill(); txt(r.tag,P+w+14+22,py+33,`bold 26px ${FONT}`,'#fff');
-    const cx=W-P-92, cy=y+118, rad=78;
-    c.lineWidth=18; c.strokeStyle='rgba(211,34,46,.16)'; c.beginPath(); c.arc(cx,cy,rad,0,Math.PI*2); c.stroke();
-    c.strokeStyle=C.red; c.lineCap='round'; c.beginPath(); c.arc(cx,cy,rad,0,Math.PI*2); c.stroke();
-    txt(String(r.lp),cx,cy+20,`bold 64px ${FONT}`,C.ink,'center'); txt(r.t.lpl,cx,cy+rad+44,`22px ${FONT}`,C.mut,'center');
+function laurel(c,cx,cy,R,col){ // two laurel branches around a circle (flat colour)
+  c.fillStyle=col;
+  for(const side of [1,-1]) for(let k=0;k<9;k++){
+    const t=Math.PI*(0.6+k*0.1), px=cx+side*(R+9)*Math.cos(t), py=cy+(R+9)*Math.sin(t);
+    c.save(); c.translate(px,py); c.rotate(side===1?t+Math.PI/2+.45:Math.PI-(t+Math.PI/2)-.45); c.beginPath(); c.ellipse(0,0,13,5.5,0,0,7); c.fill(); c.restore();
   }
-  y+=252;
+}
+function layout(c,r,draw,W,imgs){
+  const PX=70, IW=W-2*PX, PAD=30; let y=0;
+  const txt=(s,x,yy,font,col,al)=>{c.font=font;c.fillStyle=col;c.textAlign=al||'left';c.fillText(s,x,yy);};
+  const diamond=(x,yy,s,col)=>{c.fillStyle=col;c.beginPath();c.moveTo(x,yy-s);c.lineTo(x+s,yy);c.lineTo(x,yy+s);c.lineTo(x-s,yy);c.closePath();c.fill();};
+  const hair=(x1,x2,yy,col,w)=>{c.strokeStyle=col;c.lineWidth=w||1.5;c.beginPath();c.moveTo(x1,yy);c.lineTo(x2,yy);c.stroke();};
+  // ===== banner =====
+  const bx=52,bw=W-104,by=56,bh=232;
+  if(draw){
+    c.fillStyle=C.redD; c.fillRect(bx,by,bw,bh); c.strokeStyle=C.goldL; c.lineWidth=1.5; c.strokeRect(bx+8,by+8,bw-16,bh-16);
+    // medallion + angel
+    const mx=bx+134,my=by+118; c.fillStyle=C.bg; c.beginPath(); c.arc(mx,my,92,0,7); c.fill(); c.strokeStyle=C.gold; c.lineWidth=4; c.stroke(); c.strokeStyle=C.goldL; c.lineWidth=1.5; c.beginPath(); c.arc(mx,my,84,0,7); c.stroke();
+    if(imgs.angel){ const h=170,w=h*80/108; c.drawImage(imgs.angel,mx-w/2,my-h/2+6,w,h); }
+    const tx=bx+256;
+    if(imgs.logo){ const lh=50,lw=imgs.logo.width/imgs.logo.height*lh; c.fillStyle=C.gold; c.fillRect(tx-2,by+24,lw+4,lh+4); c.drawImage(imgs.logo,tx,by+26,lw,lh); }
+    c.save(); if('letterSpacing' in c) c.letterSpacing='3px'; txt(r.t.app.toUpperCase(),tx,by+104,`600 19px ${FONT}`,C.goldL); c.restore();
+    c.font=`bold 58px ${FONT}`; let nm=r.name; while(c.measureText(nm).width>400&&nm.length>2) nm=nm.slice(0,-1); if(nm!==r.name) nm+='…';
+    txt(nm,tx,by+165,`bold 58px ${FONT}`,'#FFF6DD');
+    txt(r.tag,tx,by+205,`italic 27px ${FONT}`,C.goldL);
+    // seal with laurel
+    const cx=bx+bw-118, cy=by+108, R=56;
+    laurel(c,cx,cy,R,C.goldL);
+    c.fillStyle='#FFF6DD'; c.beginPath(); c.arc(cx,cy,R,0,7); c.fill(); c.strokeStyle=C.gold; c.lineWidth=3; c.stroke();
+    c.strokeStyle=C.red; c.lineWidth=1.5; c.beginPath(); c.arc(cx,cy,R-8,0,7); c.stroke();
+    txt(String(r.lp),cx,cy+23,`bold 66px ${FONT}`,C.redD,'center');
+    txt(r.t.lpl,cx,cy+R+38,`italic 21px ${FONT}`,C.goldL,'center');
+    hair(bx,bx+bw,by+bh+9,C.gold,3); hair(bx,bx+bw,by+bh+16,C.goldL,1.2);
+  }
+  y=by+bh+34;
   const section=(title,items,kind)=>{
-    c.font=`23px ${FONT}`; const lh=31, bw=IW-2*28-(kind==='tip'?52:30);
-    const blocks=items.map(it=>wrap(c,kind==='tip'?it[1]+'  '+it[2]:it,bw));
-    let h=24+44+blocks.reduce((s,b)=>s+b.length*lh+10,0)+0+6;
+    c.font=`22.5px ${FONT}`; const lh=28.5, ind=kind==='dia'||kind==='watch'?32:62, bw2=IW-2*PAD-ind;
+    const blocks=items.map(it=>wrap(c,kind==='tip'?it[1]+'  '+it[2]:it,bw2));
+    const h=60+blocks.reduce((s,b)=>s+b.length*lh+8,0)+8;
     if(draw){
-      c.fillStyle=C.card; rrect(c,P,y,IW,h,22); c.fill(); c.strokeStyle=C.line; c.lineWidth=1.5; c.stroke();
-      c.fillStyle=C.red; rrect(c,P+28,y+26,6,28,3); c.fill();
-      txt(title,P+46,y+50,`bold 29px ${FONT}`,C.ink);
+      c.fillStyle='#F6ECD6'; c.fillRect(PX,y,IW,h); c.strokeStyle=C.goldL; c.lineWidth=1.5; c.strokeRect(PX,y,IW,h);
+      c.strokeStyle=C.gold; c.lineWidth=1; c.strokeRect(PX+5,y+5,IW-10,h-10);
+      c.save(); if('letterSpacing' in c) c.letterSpacing='2px'; c.font=`bold 26px ${FONT}`; const tw=c.measureText(title).width; c.restore();
+      const cx=W/2, g=26, ty=y+36; hair(PX+PAD,cx-tw/2-g-14,ty-9,C.gold,1.5); hair(cx+tw/2+g+14,PX+IW-PAD,ty-9,C.gold,1.5);
+      diamond(cx-tw/2-g,ty-9,5,C.red); diamond(cx+tw/2+g,ty-9,5,C.red);
+      c.save(); if('letterSpacing' in c) c.letterSpacing='2px'; txt(title,cx,ty,`bold 26px ${FONT}`,C.redD,'center'); c.restore();
     }
-    let yy=y+24+44+22;
+    let yy=y+76;
     blocks.forEach((b,i)=>{
       if(draw){
-        if(kind==='tip'){ c.fillStyle=C.red; c.beginPath(); c.arc(P+28+18,yy-8+4,19,0,7); c.fill(); txt(items[i][0],P+28+18,yy+4,`bold 22px ${FONT}`,'#fff','center'); }
-        else { c.fillStyle=kind==='watch'?C.gold:C.red; c.beginPath(); c.arc(P+28+8,yy-8,6,0,7); c.fill(); }
-        b.forEach((ln,j)=>{ if(kind==='tip'&&j===0){ const lab=items[i][1]+'  '; c.font=`bold 23px ${FONT}`; const lw=c.measureText(lab).width; txt(lab.trim(),P+28+52,yy+j*lh,`bold 23px ${FONT}`,C.redD); c.font=`23px ${FONT}`; txt(ln.slice(items[i][1].length).trim(),P+28+52+lw,yy+j*lh,`23px ${FONT}`,C.ink); } else txt(ln,P+28+(kind==='tip'?52:30),yy+j*lh,`23px ${FONT}`,C.ink); });
+        const bxp=PX+PAD;
+        if(kind==='tip'||kind==='num'){ const lab=kind==='num'?['I','II','III'][i]:items[i][0]; c.fillStyle=C.redD; c.beginPath(); c.arc(bxp+20,yy-6,19,0,7); c.fill(); c.strokeStyle=C.goldL; c.lineWidth=1.5; c.beginPath(); c.arc(bxp+20,yy-6,15.5,0,7); c.stroke(); txt(lab,bxp+20,yy+1,`bold ${lab.length>2?15:19}px ${FONT}`,'#FFF6DD','center'); }
+        else diamond(bxp+9,yy-7,5.5,kind==='watch'?C.gold:C.red);
+        b.forEach((ln,j)=>{ if(kind==='tip'&&j===0){ const lab=items[i][1]+'  '; c.font=`bold 22.5px ${FONT}`; const lw=c.measureText(lab).width; txt(lab.trim(),bxp+ind,yy,`bold 22.5px ${FONT}`,C.redD); txt(ln.slice(items[i][1].length).trim(),bxp+ind+lw,yy,`22.5px ${FONT}`,C.ink); } else txt(ln,bxp+ind,yy+j*lh,`22.5px ${FONT}`,C.ink); });
       }
-      yy+=b.length*lh+10;
+      yy+=b.length*lh+8;
     });
-    y+=h+14;
+    y+=h+12;
   };
-  section(r.t.h0,r.personality,'str');
-  section(r.t.h1,r.strengths,'str');
+  section(r.t.h0,r.personality,'dia');
+  section(r.t.h1,r.strengths,'num');
   section(r.t.h2,r.watch,'watch');
-  if(r.style.length||r.note){
-    c.font=`21px ${FONT}`; const ls=wrap(c,r.style.concat(r.note?[r.note]:[]).join('   '),IW-56);
-    if(draw){ ls.forEach((l,i)=>txt(l,P+28,y+22+i*28,`italic 21px ${FONT}`,C.mut)); }
-    y+=ls.length*28+22;
-  }
   section(r.t.h3,r.links.map((x,i)=>[String(i+1),x[0],x[1]]),'tip');
   section(r.t.h4,r.tips,'tip');
-  // CTA
-  c.font=`bold 24px ${FONT}`; const cl=wrap(c,r.t.cta,IW-60); const ch=24+cl.length*32+54;
-  if(draw){ c.fillStyle=C.red; rrect(c,P,y,IW,ch,22); c.fill(); cl.forEach((l,i)=>txt(l,P+30,y+42+i*32,`bold 24px ${FONT}`,'#fff'));
-    c.fillStyle='#fff'; rrect(c,P+30,y+ch-58,300,40,20); c.fill(); txt(r.t.wa,P+30+150,y+ch-30,`bold 22px ${FONT}`,C.red,'center'); }
-  y+=ch+18;
-  if(draw) txt(r.t.sig,W/2,y+10,`bold 26px ${FONT}`,C.ink,'center');
-  y+=42; c.font=`17px ${FONT}`; const dl=wrap(c,r.t.disc,IW-40);
-  if(draw) dl.forEach((l,i)=>txt(l,W/2,y+i*23,`17px ${FONT}`,C.mut,'center'));
-  y+=dl.length*23+14; return y;
+  // CTA band
+  c.font=`bold 23px ${FONT}`; const cl=wrap(c,r.t.cta,IW-80); const ch=26+cl.length*31+62;
+  if(draw){ c.fillStyle=C.redD; c.fillRect(PX,y,IW,ch); c.strokeStyle=C.goldL; c.lineWidth=2; c.strokeRect(PX+8,y+8,IW-16,ch-16);
+    cl.forEach((l,i)=>txt(l,W/2,y+46+i*31,`bold 23px ${FONT}`,'#FFF6DD','center'));
+    c.fillStyle='#FFF6DD'; rrect(c,W/2-150,y+ch-64,300,40,20); c.fill(); txt(r.t.wa,W/2,y+ch-36,`bold 21px ${FONT}`,C.redD,'center'); }
+  y+=ch+22;
+  if(draw){ hair(W/2-110,W/2-12,y-4,C.gold,1.5); hair(W/2+12,W/2+110,y-4,C.gold,1.5); diamond(W/2,y-4,5,C.gold); txt(r.t.sig,W/2,y+30,`bold italic 25px ${FONT}`,C.ink,'center'); }
+  y+=58; c.font=`16.5px ${FONT}`; const dl=wrap(c,r.t.disc,IW-30);
+  if(draw) dl.forEach((l,i)=>txt(l,W/2,y+i*21,`16.5px ${FONT}`,C.mut,'center'));
+  y+=dl.length*21+14; return y;
 }
 async function renderCanvas(r,W,H){
   const cv=document.createElement('canvas'); cv.width=W; cv.height=H; const c=cv.getContext('2d');
   c.fillStyle=C.bg; c.fillRect(0,0,W,H);
-  c.fillStyle='rgba(242,193,78,.28)'; c.beginPath(); c.arc(W-60,120,230,0,7); c.fill();
-  c.fillStyle='rgba(211,34,46,.09)'; c.beginPath(); c.arc(40,H-160,300,0,7); c.fill();
+  const fy=(H-Math.min(H,1350))/2, fh=Math.min(H,1350);
+  c.strokeStyle=C.redD; c.lineWidth=3; c.strokeRect(26,fy+26,W-52,fh-52); c.strokeStyle=C.gold; c.lineWidth=1.5; c.strokeRect(38,fy+38,W-76,fh-76);
+  c.fillStyle=C.gold; for(const [x,yy] of [[38,fy+38],[W-38,fy+38],[38,fy+fh-38],[W-38,fy+fh-38]]){ c.beginPath(); c.moveTo(x,yy-9); c.lineTo(x+9,yy); c.lineTo(x,yy+9); c.lineTo(x-9,yy); c.closePath(); c.fill(); }
   try{ await document.fonts.ready; }catch(e){}
   const imgs={angel:await getAngel(),logo:await getLogo()};
-  const total=layout(c,r,false,1080,imgs); const avail=Math.min(H,1350)-0; const s=Math.min(1,avail/total);
-  c.save(); const oy=(H-Math.min(H,1350))/2; c.translate((W-1080*s)/2,oy); c.scale(s,s); layout(c,r,true,1080,imgs); c.restore();
+  const total=layout(c,r,false,1080,imgs); const avail=Math.min(H,1350)-52; const s=Math.min(1,avail/total);
+  c.save(); const oy=(H-Math.min(H,1350))/2; c.translate((W-1080*s)/2,oy+(s<1?0:20)); c.scale(s,s); layout(c,r,true,1080,imgs); c.restore();
   return cv;
 }
 const canvasToBlob=(cv,type,q)=>new Promise(r=>cv.toBlob(r,type,q));
@@ -422,19 +466,23 @@ function vProfile(){
   <div class="actions"><button class="btn ghost" data-act="back">${ico('back',18)}</button><button class="btn" data-act="go">${ico('spark',18)} ${t('生成我的报告','Get my report')}</button></div><p class="err" id="err"></p></section>`);
 }
 function ringSVG(fit){ const r=54,c=2*Math.PI*r; return `<svg class="ring" viewBox="0 0 140 140"><circle cx="70" cy="70" r="${r}" class="rb"/><circle cx="70" cy="70" r="${r}" class="rf" stroke-dasharray="${c}" stroke-dashoffset="${c}" data-c="${c}" data-fit="${fit}" transform="rotate(-90 70 70)"/><text x="70" y="80" text-anchor="middle" class="rn" id="rn">0</text></svg>`; }
+function sealSVG(n){
+  let leaves=''; for(const side of [1,-1]) for(let k=0;k<9;k++){ const t=Math.PI*(0.6+k*0.1), x=60+side*(46+9)*Math.cos(t), y=60+(46+9)*Math.sin(t), rot=(side===1?t+Math.PI/2+.45:Math.PI-(t+Math.PI/2)-.45)*180/Math.PI; leaves+=`<ellipse cx="0" cy="0" rx="10" ry="4.2" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})" fill="#D9BE7C"/>`; }
+  return `<svg class="seal" viewBox="0 0 120 120" aria-hidden="true">${leaves}<circle cx="60" cy="60" r="46" fill="#FFF6DD" stroke="#B8913F" stroke-width="2.5"/><circle cx="60" cy="60" r="39" fill="none" stroke="#B81C26" stroke-width="1.2"/><text x="60" y="78" text-anchor="middle" font-size="52" font-weight="700" fill="#8E1520" font-family="Times New Roman,Songti SC,serif">${n}</text></svg>`;
+}
 function reportHTML(r){
   const li=a=>a.map(x=>`<li>${esc(x)}</li>`).join('');
   const tipIc=['clock','trend','award','heart'];
   return `<article class="glass report" id="report">
-   <div class="rh">${angelHTML('mid')}<div class="rmeta"><small>${r.t.app}</small><h2 class="rname">${esc(r.name)}</h2><span class="pill">${esc(r.tag)}</span></div><div class="ringw"><div class="lpb"><b>${r.lp}</b></div><small>${r.t.lpl}</small></div></div>
-   <h3><i></i>${r.t.h0}</h3><ul class="dots">${li(r.personality)}</ul>
-   <h3><i></i>${r.t.h1}</h3><ul class="dots">${li(r.strengths)}</ul>
-   <h3><i></i>${r.t.h2}</h3><ul class="dots gold">${li(r.watch)}</ul>
+   <div class="rh"><div class="med">${angelHTML('mid')}</div><div class="rmeta"><small>${r.t.app}</small><h2 class="rname">${esc(r.name)}</h2><span class="pill">${esc(r.tag)}</span></div><div class="ringw">${sealSVG(r.lp)}<small>${r.t.lpl}</small></div></div>
+   <section class="pn"><h3>${r.t.h0}</h3><ul class="dots">${li(r.personality)}</ul></section>
+   <section class="pn"><h3>${r.t.h1}</h3><ol class="roman">${li(r.strengths)}</ol></section>
+   <section class="pn"><h3>${r.t.h2}</h3><ul class="dots gold">${li(r.watch)}</ul></section>
    ${r.style.length?`<p class="style">${esc(r.style.join('  '))}</p>`:''}
-   <h3><i></i>${r.t.h3}</h3>
-   <div class="tips">${r.links.map((x,i)=>`<div class="tip"><span class="tb">${i+1}</span><div><b>${x[0]}</b><p>${x[1]}</p></div></div>`).join('')}</div>
-   <h3><i></i>${r.t.h4}</h3>
-   <div class="tips">${r.tips.map((x,i)=>`<div class="tip"><span class="tb">${ico(tipIc[i],20)}</span><div><b>${x[0]} · ${x[1]}</b><p>${x[2]}</p></div></div>`).join('')}</div>
+   <section class="pn"><h3>${r.t.h3}</h3>
+   <div class="tips">${r.links.map((x,i)=>`<div class="tip"><span class="tb">${i+1}</span><div><b>${x[0]}</b><p>${x[1]}</p></div></div>`).join('')}</div></section>
+   <section class="pn"><h3>${r.t.h4}</h3>
+   <div class="tips">${r.tips.map((x,i)=>`<div class="tip"><span class="tb">${x[0]}</span><div><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join('')}</div></section>
    <div class="cta"><p>${r.t.cta}</p><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/60197787031?text=${encodeURIComponent((lang==='zh'?'你好 Jeff，我是 ':'Hi Jeff, I\'m ')+r.name+(lang==='zh'?'，我刚做完生日解码，想了解更多。':', I just did the Birthday Decoder and would like to know more.'))}">${ico('wa',18)} ${r.t.wa}</a></div>
    <p class="sig">${r.t.sig}</p><p class="disc">${r.t.disc}</p></article>`;
 }
