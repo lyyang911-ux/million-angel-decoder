@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>百万天使 · 天赋解码 | Million Angel · Talent Decoder</title>
+<meta name="description" content="2 分钟解码你的个人天赋 / Decode your talents in 2 minutes">
+<meta name="theme-color" content="#D3222E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Talent Decoder">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+:root{--red:#D3222E;--red-d:#9C1820;--gold:#F2C14E;--ink:#2A1A10;--bg:#FBF3F1;--mut:#7A6159;--glass:rgba(255,255,255,.62);--bd:rgba(255,255,255,.85);--r:22px;
+ --f:"Times New Roman","Songti SC","Noto Serif SC","STSong",SimSun,serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;font-family:var(--f);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.5;overflow-x:hidden}
+.blob{position:fixed;border-radius:50%;filter:blur(46px);z-index:-1;pointer-events:none}
+.b1{width:300px;height:300px;background:rgba(242,193,78,.45);top:-70px;right:-70px}
+.b2{width:360px;height:360px;background:rgba(211,34,46,.16);bottom:-120px;left:-120px}
+.b3{width:200px;height:200px;background:rgba(211,34,46,.10);top:42%;right:-60px}
+#app{max-width:1100px;margin:0 auto;padding:0 16px calc(24px + env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 0 10px;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{height:46px;width:auto;border-radius:8px}.bname{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang{display:flex;align-items:center;gap:6px;font:600 15px var(--f);color:var(--mut);background:var(--glass);border:1px solid var(--bd);border-radius:999px;padding:8px 14px;cursor:pointer;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.lang .on{color:var(--red);font-weight:800}
+.glass{background:var(--glass);border:1px solid var(--bd);border-radius:var(--r);padding:22px;margin:12px 0;box-shadow:0 8px 30px rgba(156,24,32,.08);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+h1{font-size:34px;line-height:1.15;margin:8px 0 10px}h2{font-size:23px;margin:0 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2 small{font-size:14px;color:var(--mut);font-weight:400}
+.hero{text-align:center;padding:30px 22px}.lead{font-size:18px;color:var(--mut);margin:0 0 22px}
+.small{font-size:14px;color:var(--mut);margin:8px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 17px var(--f);background:var(--red);color:#fff;border:0;border-radius:999px;padding:14px 26px;cursor:pointer;text-decoration:none;min-height:50px;transition:transform .15s}
+.btn:active{transform:scale(.97)}.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:rgba(255,255,255,.7);color:var(--red-d);border:1px solid rgba(211,34,46,.25)}
+.btn.red2{background:var(--ink)}.btn.wa{background:#fff;color:var(--red)}.btn.danger{color:#b00020}
+.actions{display:flex;gap:10px;justify-content:space-between;margin-top:18px}.wrapx{flex-wrap:wrap;justify-content:flex-start}
+.fl{display:block;margin:14px 0;font-weight:600;font-size:15px}
+input,select{display:block;width:100%;margin-top:6px;font:17px var(--f);color:var(--ink);background:rgba(255,255,255,.85);border:1.5px solid rgba(211,34,46,.2);border-radius:14px;padding:12px 14px;min-height:48px}
+input:focus,select:focus{outline:2px solid var(--red);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}h2.sub{margin-top:22px}
+.mini{display:flex;gap:14px;align-items:center;margin-bottom:6px}.lpb{width:96px;height:96px;border-radius:50%;border:12px solid var(--red);display:grid;place-items:center;margin:0 auto}.lpb b{font-size:38px;line-height:1}
+.row3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px}
+.err{color:var(--red);font-size:15px;min-height:22px;margin:10px 0 0}
+.prog{height:8px;background:rgba(211,34,46,.14);border-radius:8px;overflow:hidden;margin:6px 0 4px}.prog i{display:block;height:100%;background:var(--red);border-radius:8px;transition:width .3s}
+.q{margin:16px 0;padding-bottom:14px;border-bottom:1px solid rgba(211,34,46,.1)}.q p{margin:0 0 10px;font-size:17px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.dot{font:700 18px var(--f);height:50px;border-radius:14px;border:1.5px solid rgba(211,34,46,.25);background:rgba(255,255,255,.8);color:var(--ink);cursor:pointer}
+.dot.sel{background:var(--red);border-color:var(--red);color:#fff}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.chip{text-align:left;font:15px var(--f);padding:12px;border-radius:16px;border:1.5px solid rgba(211,34,46,.22);background:rgba(255,255,255,.8);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.chip b{font-size:16px}.chip span{font-size:13.5px;color:var(--mut);font-weight:400}.chip.sel{border-color:var(--red);background:rgba(211,34,46,.1)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}.seg button{font:600 15px var(--f);padding:11px 6px;border-radius:14px;border:1.5px solid rgba(211,34,46,.25);background:rgba(255,255,255,.8);cursor:pointer;color:var(--ink)}.seg .sel{background:var(--red);color:#fff;border-color:var(--red)}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:14px;font-weight:400;margin:14px 0}.chk input{width:24px;height:24px;min-height:0;margin:2px 0 0;accent-color:var(--red);flex:none}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--mut);font-size:13px;padding:10px 4px}.adm{color:var(--mut);text-decoration:none;display:inline-flex;gap:4px;align-items:center;opacity:.7}
+.ic{flex:none;vertical-align:middle}
+/* angel animation (CSS only, loops) */
+.angel{display:inline-block}.angel.big{width:170px}.angel.mid{width:112px;flex:none}
+.angel svg{width:100%;height:auto;display:block;overflow:visible;animation:float 3.4s ease-in-out infinite}
+.wing{animation:flapL 2.6s ease-in-out infinite;transform-origin:29px 55px}.wing.wr{transform-origin:51px 55px;animation-name:flapR}
+.eyes{transform-origin:40px 40px;animation:blink 4.2s infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes flapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-9deg)}}
+@keyframes flapR{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@media(prefers-reduced-motion:reduce){.angel svg,.wing,.eyes{animation:none}}
+/* report */
+.rwrap{display:block}.report{padding:20px}
+.rh{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.rmeta{flex:1;min-width:150px}.rmeta small{color:var(--red);font-weight:600;font-size:14px}
+.rname{font-size:30px;margin:2px 0 6px}.pill{display:inline-block;background:var(--red);color:#fff;font-weight:700;padding:5px 16px;border-radius:999px;font-size:16px}
+.ringw{text-align:center;width:118px;flex:none}.ringw small{color:var(--mut);font-size:13px}.ring{width:118px;height:118px}.rb{fill:none;stroke:rgba(211,34,46,.16);stroke-width:13}.rf{fill:none;stroke:var(--red);stroke-width:13;stroke-linecap:round}.rn{font:700 38px var(--f);fill:var(--ink)}
+.report h3{font-size:20px;margin:20px 0 8px;display:flex;align-items:center;gap:10px}.report h3 i{width:5px;height:20px;background:var(--red);border-radius:3px}
+.dots{margin:0;padding:0;list-style:none}.dots li{position:relative;padding:4px 0 4px 22px;font-size:16.5px}.dots li:before{content:"";position:absolute;left:2px;top:13px;width:9px;height:9px;border-radius:50%;background:var(--red)}.dots.gold li:before{background:var(--gold)}
+.style{font-style:italic;color:var(--mut);font-size:14.5px;margin:10px 0 0}.tl{font-style:italic;color:var(--red-d);margin:0 0 8px;font-size:15.5px}
+.tips{display:grid;gap:8px}.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.6);border:1px solid rgba(211,34,46,.12);border-radius:16px;padding:12px}.tip p{margin:0;font-size:15.5px}.tip b{color:var(--red-d)}
+.tb{width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;flex:none}
+.fun{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.fc{background:rgba(255,255,255,.6);border:1px solid rgba(211,34,46,.12);border-radius:16px;padding:12px}.fc small{color:var(--mut);font-size:12px;letter-spacing:.06em}.fc b{display:block;color:var(--red);font-size:18px}.fc p{margin:2px 0 0;font-size:14.5px}
+.cta{background:var(--red);color:#fff;border-radius:18px;padding:16px;margin-top:16px}.cta p{margin:0 0 12px;font-weight:700;font-size:16.5px}
+.sig{text-align:center;font-weight:700;margin:16px 0 4px}.disc{text-align:center;color:var(--mut);font-size:12px;margin:0}
+.acts{display:flex;gap:10px;flex-wrap:wrap}.acts .btn{flex:1;min-width:110px;padding:12px 14px}
+.ok{color:#1a7f37;font-weight:700;display:flex;gap:8px;align-items:center}.narrow{max-width:420px;margin:30px auto}.pin{text-align:center;font-size:30px;letter-spacing:.4em;margin:12px 0}
+.list{margin-top:14px;display:grid;gap:8px}.lr{display:flex;justify-content:space-between;gap:10px;background:rgba(255,255,255,.7);border-radius:16px;padding:12px;border:1px solid rgba(211,34,46,.12)}.lr small{color:var(--mut)}.tag{background:rgba(211,34,46,.1);color:var(--red-d);border-radius:8px;padding:1px 8px;font-size:12px}
+.gr{display:flex;gap:6px;align-items:flex-start}.gr button{width:38px;height:38px;border-radius:10px;border:1.5px solid rgba(211,34,46,.25);background:#fff;font:700 16px var(--f);cursor:pointer}.gr .sel{background:var(--red);color:#fff;border-color:var(--red)}
+#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;z-index:9}#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:820px){.rwrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr);gap:18px;align-items:start}aside{position:sticky;top:10px}h1{font-size:44px}.glass{padding:26px}}
+@media(max-width:380px){.bname{display:none}.row3{grid-template-columns:1fr 1fr 1.2fr}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div id="app"></div>
+<script>
+const ANGEL_RAW = `<svg viewBox="0 -8 80 108" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="97" rx="19" ry="3.2" fill="rgba(0,0,0,.16)"/><ellipse cx="40" cy="96" rx="27" ry="6" fill="rgba(255,201,40,.45)"/><ellipse cx="40" cy="96" rx="20" ry="4" fill="rgba(255,236,150,.7)"/><g transform=""><path d="M29 60 Q15 62 5 48 Q11 50 14 49 Q6 43 4 34 Q12 41 18 42 Q12 36 12 27 Q20 37 27 40 Q24 34 25 28 Q31 40 33 54Z" fill="#FFFFFF" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 49 Q20 51 27 55 M18 42 Q23 45 29 50 M27 40 Q29 44 31 48" fill="none" stroke="#D6E6F5" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(80 0) scale(-1 1)"><path d="M29 60 Q15 62 5 48 Q11 50 14 49 Q6 43 4 34 Q12 41 18 42 Q12 36 12 27 Q20 37 27 40 Q24 34 25 28 Q31 40 33 54Z" fill="#FFFFFF" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 49 Q20 51 27 55 M18 42 Q23 45 29 50 M27 40 Q29 44 31 48" fill="none" stroke="#D6E6F5" stroke-width="1.6" stroke-linecap="round"/></g><path d="M27 53 Q17 75 19 93 Q40 98 61 93 Q63 75 53 53Z" fill="#9C1820" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M21 38 Q19 55 25 57 L55 57 Q61 55 59 38Z" fill="#F2C14E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="31" y="75" width="7.5" height="13" fill="#5B3A29" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="41.5" y="75" width="7.5" height="13" fill="#5B3A29" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M27.5 87 h11.5 v7 q0 2.6 -2.6 2.6 h-9.4 q-2.6 0 -2.6 -2.6 q0 -4.6 3.1 -7z" fill="#4A2E20" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M52.5 87 h-11.5 v7 q0 2.6 2.6 2.6 h9.4 q2.6 0 2.6 -2.6 q0 -4.6 -3.1 -7z" fill="#4A2E20" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M28 89.5 H39 M41 89.5 H52" stroke="rgba(255,255,255,.25)" stroke-width="1.6"/><path d="M28 53 Q25 65 22 79 Q40 84 58 79 Q55 65 52 53 Q40 49 28 53Z" fill="#D3222E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M47 54 Q51 65 53.5 80.2 Q56.5 79.4 57 79 Q54.2 65 51 53.6Z" fill="#9C1820" stroke="none"/><path d="M22.6 77 Q40 82 57.4 77" fill="none" stroke="#9C1820" stroke-width="2.2"/><path d="M34.5 58 L40 63 L45.5 58 M34.5 62.5 L40 67.5 L45.5 62.5" fill="none" stroke="#FFC928" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="24.6" y="68.5" width="30.8" height="4.6" rx="1.6" fill="#4A2E20" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="37.4" y="67.9" width="5.2" height="5.8" rx="1.2" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="45.5" y="71.5" width="7" height="7" rx="2" fill="#9A6326" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M45.5 74 H52.5" stroke="#2A1A10" stroke-width="1.3"/><path d="M29.5 57 L23.5 70" fill="none" stroke="#2A1A10" stroke-width="7.199999999999999" stroke-linecap="round"/><path d="M29.5 57 L23.5 70" fill="none" stroke="#D3222E" stroke-width="4.8" stroke-linecap="round"/><circle cx="23.5" cy="71" r="3.4" fill="#FFE0C2" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M50.5 57 L57 70" fill="none" stroke="#2A1A10" stroke-width="7.199999999999999" stroke-linecap="round"/><path d="M50.5 57 L57 70" fill="none" stroke="#D3222E" stroke-width="4.8" stroke-linecap="round"/><circle cx="57" cy="71" r="3.4" fill="#FFE0C2" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M27 51.5 Q40 58.5 53 51.5 L54 57 Q40 64.5 26 57Z" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M44.5 58.5 L47.5 71 L42 69.2 L41 59.6Z" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="40" cy="36" r="17" fill="#FFE0C2" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M23 37 Q21 18 40 18 Q59 18 57 37 Q53 29 47.5 31 Q43.5 25.5 38 30 Q31 26 23 37Z" fill="#F2C14E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><ellipse cx="33.5" cy="40" rx="2.1" ry="2.8" fill="#2A1A10"/><ellipse cx="46.5" cy="40" rx="2.1" ry="2.8" fill="#2A1A10"/><circle cx="34.3" cy="38.9" r=".85" fill="#fff"/><circle cx="47.3" cy="38.9" r=".85" fill="#fff"/><ellipse cx="29" cy="45" rx="3.1" ry="1.8" fill="#F28B8B" opacity=".55"/><ellipse cx="51" cy="45" rx="3.1" ry="1.8" fill="#F28B8B" opacity=".55"/><path d="M37.6 46.2 Q40 48.6 42.4 46.2" fill="none" stroke="#2A1A10" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="40" cy="11" rx="11" ry="3.4" fill="none" stroke="#2A1A10" stroke-width="5.4"/><ellipse cx="40" cy="11" rx="11" ry="3.4" fill="none" stroke="#FFC928" stroke-width="2.6"/><path d="M23.5 29.5 Q40 24.5 56.5 29.5 L56.5 33 Q40 28 23.5 33Z" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="40" cy="28.4" r="2" fill="#D3222E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M12.5 59 H33 V71 Q33 82.5 22.75 87 Q12.5 82.5 12.5 71Z" fill="#D3222E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M15.5 62 H30 V71 Q30 80 22.75 83.6 Q15.5 80 15.5 71Z" fill="none" stroke="#FFC928" stroke-width="1.6"/><path d="M18 66 L22.75 70.5 L27.5 66 M18 71 L22.75 75.5 L27.5 71" fill="none" stroke="#FFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M66 30 l1.2 3 3 1.2 -3 1.2 -1.2 3 -1.2 -3 -3 -1.2 3 -1.2z M70 52 l.8 2 2 .8 -2 .8 -.8 2 -.8 -2 -2 -.8 2 -.8z" fill="#FFE680" stroke="#2A1A10" stroke-width=".8"/></svg>`;
+const ANGEL_ANIM = `<svg viewBox="0 -8 80 108" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="97" rx="19" ry="3.2" fill="rgba(0,0,0,.16)"/><ellipse cx="40" cy="96" rx="27" ry="6" fill="rgba(255,201,40,.45)"/><ellipse cx="40" cy="96" rx="20" ry="4" fill="rgba(255,236,150,.7)"/><g class="wing"><g transform=""><path d="M29 60 Q15 62 5 48 Q11 50 14 49 Q6 43 4 34 Q12 41 18 42 Q12 36 12 27 Q20 37 27 40 Q24 34 25 28 Q31 40 33 54Z" fill="#FFFFFF" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 49 Q20 51 27 55 M18 42 Q23 45 29 50 M27 40 Q29 44 31 48" fill="none" stroke="#D6E6F5" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="wing wr"><g transform="translate(80 0) scale(-1 1)"><path d="M29 60 Q15 62 5 48 Q11 50 14 49 Q6 43 4 34 Q12 41 18 42 Q12 36 12 27 Q20 37 27 40 Q24 34 25 28 Q31 40 33 54Z" fill="#FFFFFF" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 49 Q20 51 27 55 M18 42 Q23 45 29 50 M27 40 Q29 44 31 48" fill="none" stroke="#D6E6F5" stroke-width="1.6" stroke-linecap="round"/></g></g><path d="M27 53 Q17 75 19 93 Q40 98 61 93 Q63 75 53 53Z" fill="#9C1820" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M21 38 Q19 55 25 57 L55 57 Q61 55 59 38Z" fill="#F2C14E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="31" y="75" width="7.5" height="13" fill="#5B3A29" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="41.5" y="75" width="7.5" height="13" fill="#5B3A29" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M27.5 87 h11.5 v7 q0 2.6 -2.6 2.6 h-9.4 q-2.6 0 -2.6 -2.6 q0 -4.6 3.1 -7z" fill="#4A2E20" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M52.5 87 h-11.5 v7 q0 2.6 2.6 2.6 h9.4 q2.6 0 2.6 -2.6 q0 -4.6 -3.1 -7z" fill="#4A2E20" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M28 89.5 H39 M41 89.5 H52" stroke="rgba(255,255,255,.25)" stroke-width="1.6"/><path d="M28 53 Q25 65 22 79 Q40 84 58 79 Q55 65 52 53 Q40 49 28 53Z" fill="#D3222E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M47 54 Q51 65 53.5 80.2 Q56.5 79.4 57 79 Q54.2 65 51 53.6Z" fill="#9C1820" stroke="none"/><path d="M22.6 77 Q40 82 57.4 77" fill="none" stroke="#9C1820" stroke-width="2.2"/><path d="M34.5 58 L40 63 L45.5 58 M34.5 62.5 L40 67.5 L45.5 62.5" fill="none" stroke="#FFC928" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="24.6" y="68.5" width="30.8" height="4.6" rx="1.6" fill="#4A2E20" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="37.4" y="67.9" width="5.2" height="5.8" rx="1.2" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><rect x="45.5" y="71.5" width="7" height="7" rx="2" fill="#9A6326" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M45.5 74 H52.5" stroke="#2A1A10" stroke-width="1.3"/><path d="M29.5 57 L23.5 70" fill="none" stroke="#2A1A10" stroke-width="7.199999999999999" stroke-linecap="round"/><path d="M29.5 57 L23.5 70" fill="none" stroke="#D3222E" stroke-width="4.8" stroke-linecap="round"/><circle cx="23.5" cy="71" r="3.4" fill="#FFE0C2" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M50.5 57 L57 70" fill="none" stroke="#2A1A10" stroke-width="7.199999999999999" stroke-linecap="round"/><path d="M50.5 57 L57 70" fill="none" stroke="#D3222E" stroke-width="4.8" stroke-linecap="round"/><circle cx="57" cy="71" r="3.4" fill="#FFE0C2" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M27 51.5 Q40 58.5 53 51.5 L54 57 Q40 64.5 26 57Z" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M44.5 58.5 L47.5 71 L42 69.2 L41 59.6Z" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="40" cy="36" r="17" fill="#FFE0C2" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M23 37 Q21 18 40 18 Q59 18 57 37 Q53 29 47.5 31 Q43.5 25.5 38 30 Q31 26 23 37Z" fill="#F2C14E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><g class="eyes"><ellipse cx="33.5" cy="40" rx="2.1" ry="2.8" fill="#2A1A10"/><ellipse cx="46.5" cy="40" rx="2.1" ry="2.8" fill="#2A1A10"/><circle cx="34.3" cy="38.9" r=".85" fill="#fff"/><circle cx="47.3" cy="38.9" r=".85" fill="#fff"/></g><ellipse cx="29" cy="45" rx="3.1" ry="1.8" fill="#F28B8B" opacity=".55"/><ellipse cx="51" cy="45" rx="3.1" ry="1.8" fill="#F28B8B" opacity=".55"/><path d="M37.6 46.2 Q40 48.6 42.4 46.2" fill="none" stroke="#2A1A10" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="40" cy="11" rx="11" ry="3.4" fill="none" stroke="#2A1A10" stroke-width="5.4"/><ellipse cx="40" cy="11" rx="11" ry="3.4" fill="none" stroke="#FFC928" stroke-width="2.6"/><path d="M23.5 29.5 Q40 24.5 56.5 29.5 L56.5 33 Q40 28 23.5 33Z" fill="#FFC928" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="40" cy="28.4" r="2" fill="#D3222E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M12.5 59 H33 V71 Q33 82.5 22.75 87 Q12.5 82.5 12.5 71Z" fill="#D3222E" stroke="#2A1A10" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M15.5 62 H30 V71 Q30 80 22.75 83.6 Q15.5 80 15.5 71Z" fill="none" stroke="#FFC928" stroke-width="1.6"/><path d="M18 66 L22.75 70.5 L27.5 66 M18 71 L22.75 75.5 L27.5 71" fill="none" stroke="#FFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M66 30 l1.2 3 3 1.2 -3 1.2 -1.2 3 -1.2 -3 -3 -1.2 3 -1.2z M70 52 l.8 2 2 .8 -2 .8 -.8 2 -.8 -2 -2 -.8 2 -.8z" fill="#FFE680" stroke="#2A1A10" stroke-width=".8"/></svg>`;
+/* ===== content: all bilingual copy + rule tables (no AI, all local) ===== */
+const DISC = {
+ D:{zh:'D 主导型',en:'D Dominance',d:['目标明确、敢拍板','Goal-driven and decisive'],c:['加上 D 型的魄力，你敢于推进成交','with your D drive you move decisions forward'],tip:['沟通重点：直奔主题、给出选择','Communication: get to the point, offer clear options']},
+ I:{zh:'I 影响型',en:'I Influence',d:['热情、有感染力、擅长社交','Warm, expressive, sociable'],c:['加上 I 型的热情，气氛总被你带动','with your I warmth you lift the mood of every meeting'],tip:['沟通重点：多讲故事、多互动','Communication: tell stories, keep it interactive']},
+ S:{zh:'S 稳健型',en:'S Steadiness',d:['耐心可靠、善于陪伴','Patient, reliable, supportive'],c:['加上 S 型的耐心，客户觉得被陪伴','with your S patience clients feel accompanied'],tip:['沟通重点：放慢节奏、给足安全感','Communication: slow down, give reassurance']},
+ C:{zh:'C 谨慎型',en:'C Conscientious',d:['细致严谨、重逻辑与数据','Detailed, analytical, logical'],c:['加上 C 型的严谨，你讲得清楚、做得准确','with your C precision you explain clearly and act accurately'],tip:['沟通重点：备好数据、条理分明','Communication: bring data, stay structured']},
+};
+const MB = {N:['擅长看大局','sees the big picture'],S:['注重实际细节','values practical detail'],T:['逻辑清晰','thinks logically'],F:['重视人的感受','values people\'s feelings'],J:['做事有计划','plans ahead'],P:['灵活应变','adapts flexibly']};
+const MBTI_TYPES = ['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
+const ZODIAC = [ // [name zh, name en, startMonth, startDay, zh line, en line] (sorted by start date; Capricorn wraps)
+ ['摩羯座','Capricorn',12,22,'有耐心、有毅力，步步为营。','Patient and persistent, one steady step at a time.'],
+ ['水瓶座','Aquarius',1,20,'想法独特，重视自由。','Original thinker who values freedom.'],
+ ['双鱼座','Pisces',2,19,'感受力强，富有同理心。','Sensitive and full of empathy.'],
+ ['白羊座','Aries',3,21,'行动力强，敢于冲锋。','Energetic and first to act.'],
+ ['金牛座','Taurus',4,20,'稳重可靠，重视安全感。','Reliable and values security.'],
+ ['双子座','Gemini',5,21,'反应快，善于沟通。','Quick-witted and a great communicator.'],
+ ['巨蟹座','Cancer',6,21,'顾家、体贴，重感情。','Caring, family-minded and warm.'],
+ ['狮子座','Leo',7,23,'自信大方，有领导魅力。','Confident and a natural leader.'],
+ ['处女座','Virgo',8,23,'细心严谨，追求完美。','Careful, precise, aims for excellence.'],
+ ['天秤座','Libra',9,23,'公正平衡，擅长协调。','Fair-minded and a gifted mediator.'],
+ ['天蝎座','Scorpio',10,23,'专注深入，意志坚定。','Focused, intense and determined.'],
+ ['射手座','Sagittarius',11,22,'乐观开朗，爱探索。','Optimistic and loves to explore.'],
+];
+
+/* TIPS tails: personalised by the person's strongest traits. [zh,en] */
+const TIP_TAIL = {
+ T:{E:['你爱和人接触，可以自己安排见客与活动的时间，把精力放在最享受的相处上。','You love people, and can plan your own meetings and events around the interactions you enjoy.'],
+    C:['你自律、有计划，自己排节奏会让你更有效率。','You are disciplined and organised, so running your own schedule makes you even more effective.'],
+    ES:['你抗压稳定，能自己掌控节奏，在忙与休息之间保持平衡。','You are steady under pressure and can balance busy periods and rest on your own terms.'],
+    A:['你重视身边的人，时间自主让你能陪家人，也能陪客户。','You care about people, so time autonomy lets you be there for family and clients alike.'],
+    O:['你爱尝试新事物，自己安排时间，就能把好奇心用在学习与创意上。','You love trying new things, and a flexible schedule gives your curiosity room to grow.']},
+ I:{E:['多认识人，你的收入就跟着人脉一起成长。','The more people you meet, the more your income grows with your network.'],
+    C:['稳扎稳打、长期累积，你的收入会越滚越大。','Steady, consistent effort compounds into growing income over time.'],
+    ES:['被拒绝后你能很快再站起来，这正是把收入做稳的关键。','Bouncing back after a "no" is exactly what builds stable income.'],
+    A:['客户信任你，转介绍就会带来持续的收入。','Clients who trust you bring referrals, and referrals build lasting income.'],
+    O:['你擅长把复杂的事讲清楚，让客户看懂，收入自然来。','You explain complex ideas clearly, and clients who understand are clients who say yes.']},
+ P:{E:['你有带动别人的潜质，将来可以走向 PRUManager，带领自己的团队。','You can energise others, a good base for leading your own team as a PRUManager.'],
+    C:['你重视计划与执行，18 个月系统训练会把你的稳定练成专业。','You value planning and follow-through, and the 18-month programme turns that into professional skill.'],
+    ES:['有系统陪你一步步成长，你的稳定会让你走得更远。','With a system guiding each step, your steadiness will take you further.'],
+    A:['你懂得体谅人，很适合日后带领和培养新人。','You are empathetic, which suits coaching and growing new team members later.'],
+    O:['你爱学习新东西，训练和晋升路径会让你一直有新挑战。','You love learning, so the training and promotion path keeps you challenged.']},
+ S:{E:['每一次和家庭的真诚对话，你都能带来温暖与安心。','Every sincere conversation with a family brings warmth and reassurance.'],
+    C:['你说到做到，家庭最需要的，就是这份可靠。','You follow through, and a reliable adviser is what families need most.'],
+    ES:['你情绪稳定，能在客户最需要的时候陪在他们身边。','You stay calm, so you can be there when clients need you most.'],
+    A:['你很会体会别人，帮助家庭的成就感对你会特别深。','You sense others deeply, so the sense of purpose from helping families runs deep.'],
+    O:['你能把保障讲得让人看懂，让家庭真正安心。','You can make protection easy to understand, giving families real peace of mind.']},
+};
+
+/* ===== birthday-driven personality library: Birthday number 1-9 x Zodiac (12) =====
+   LP: [title zh, title en, persona zh, persona en, strength1 zh/en, strength2 zh/en, watch+tip zh/en, industry link zh/en] */
+const LP = {
+ 1:['开创者','Pioneer','你有主见，敢做第一个行动的人，不喜欢被框住。','You have strong opinions and are happy to act first.',
+    ['敢于开口、主动出击，是天生的开拓者。','You act first and open doors that others wait at.'],['目标清晰，做决定不拖泥带水。','Your goals are clear and your decisions quick.'],
+    ['有时太急着往前冲。小建议：先听客户说完，再给方案。','You can move too fast. Tip: let clients finish speaking before you propose.'],
+    ['见客户时，你的魄力让人觉得有方向、被带领，适合开拓新客群，也适合日后建立自己的团队。','With clients your drive gives direction, a fit for opening new markets and later building your own team.']],
+ 2:['协调者','Peacemaker','你温和细腻，善于感受气氛和别人的需要。','You are gentle and tactful, quick to sense the mood and what people need.',
+    ['善于倾听，客户愿意对你说真心话。','You listen well, and clients open up to you.'],['有耐心、善合作，容易和人建立长久关系。','Patient and cooperative, you build lasting relationships.'],
+    ['太在意别人的感受，有时不敢说出自己的想法。小建议：练习温和而坚定地提出建议。','You may hold back your own view for others\' sake. Tip: practise offering advice warmly but firmly.'],
+    ['保险是长期关系，你的耐心与体贴让客户一路放心，转介绍也会自然出现。','Insurance is a long-term relationship; your patience keeps clients at ease and referrals follow naturally.']],
+ 3:['表达者','Communicator','你乐观、有感染力，说话让人觉得轻松。','You are upbeat and expressive, and people feel at ease around you.',
+    ['擅长表达，能把复杂的东西讲得生动好懂。','You explain complex things in a vivid, easy way.'],['带动气氛的能力强，容易让人敞开心扉。','You lift the mood and make people comfortable opening up.'],
+    ['点子多、热情高，但容易三分钟热度。小建议：用每周目标把热情变成持续行动。','Plenty of ideas, but enthusiasm can fade. Tip: use weekly goals to turn it into steady action.'],
+    ['讲解保障需要故事和比喻，你一听就懂、一讲就明；做分享会和社交媒体也是你的强项。','Explaining protection takes stories and analogies, your strength; so are talks and social media.']],
+ 4:['建设者','Builder','你踏实稳健，重视规则和基础。','You are steady and grounded, and you value structure.',
+    ['做事有条理，答应的事一定做到。','You are organised and keep every promise.'],['耐力好，愿意一步步把根基打稳。','Great stamina, you build solid foundations step by step.'],
+    ['对变化比较谨慎。小建议：每个月尝试一个新做法，保持弹性。','You are cautious about change. Tip: try one new approach each month.'],
+    ['保险重长期经营，你的稳定可靠，会让客户放心把家庭保障交给你。','Insurance rewards long-term work; your reliability lets clients trust you with their family protection.']],
+ 5:['探索者','Explorer','你爱自由，适应力强，对新鲜事充满好奇。','You love freedom, adapt fast and are curious about everything new.',
+    ['应变快，换了场合也能自在交流。','You adapt quickly and chat comfortably in any setting.'],['好奇心强，学新东西很快。','Curious and a fast learner.'],
+    ['不太喜欢被固定框架限制。小建议：设定清楚的每月目标，把自由用在刀刃上。','Fixed routines can feel tight. Tip: set clear monthly goals and spend your freedom where it counts.'],
+    ['每天接触不同背景的人，你的应变和好奇心让你容易融入各种圈子。','You meet people from all backgrounds, and your curiosity helps you fit into any circle.']],
+ 6:['守护者','Nurturer','你有责任感，很在乎家人和身边的人。','You are responsible and deeply care about family and the people around you.',
+    ['真心关怀别人，容易赢得信任。','Your sincere care earns trust easily.'],['有担当，愿意为重要的人付出。','Dependable, you give your all for the people who matter.'],
+    ['习惯把别人放在前面，忘了照顾自己。小建议：为自己保留固定的休息时间。','You put others first and forget yourself. Tip: keep regular rest time for yourself.'],
+    ['保险的本质就是守护家庭，你的责任感与关怀，天然贴合这份事业。','Insurance is about protecting families, and your care and responsibility fit it naturally.']],
+ 7:['思考者','Thinker','你爱观察、爱思考，做事有自己的判断。','You observe and think carefully and form your own judgement.',
+    ['洞察力强，能看到别人忽略的细节。','Sharp insight, you notice details others miss.'],['专注深入，研究问题很有耐心。','Focused and patient with in-depth research.'],
+    ['想得多，对人敞开心扉会比较慢。小建议：多分享你的想法，让人看见你的用心。','You think a lot and open up slowly. Tip: share your thoughts so people see your care.'],
+    ['分析客户的保障缺口需要观察和逻辑，你的洞察力能做出贴身的建议。','Spotting protection gaps needs observation and logic, and your insight gives tailored advice.']],
+ 8:['成就者','Achiever','你目标感强，重视成果，也有管理资源的天分。','You are goal-driven, results-minded and good at managing resources.',
+    ['自带企图心，愿意为目标全力以赴。','Ambitious, you go all in for your goals.'],['看得到全局，擅长规划与领导。','You see the big picture and plan and lead well.'],
+    ['压力大时，容易对自己和别人要求太高。小建议：学会庆祝每一个小进步。','Under pressure you may expect too much. Tip: celebrate small wins.'],
+    ['收入与晋升跟努力直接挂钩，你的企图心和规划力，很适合冲刺目标、带领团队。','Income and promotion follow effort, so your ambition and planning suit target-chasing and leading a team.']],
+ 9:['理想家','Idealist','你胸怀宽广，想让身边的人过得更好。','You are big-hearted and want life to be better for the people around you.',
+    ['富有同理心，乐于帮助别人。','Empathetic, you love to help.'],['有格局，看事情不只看眼前。','You think beyond the short term.'],
+    ['容易为别人付出太多。小建议：设立界线，才能帮得更长久。','You can give too much. Tip: set boundaries so you can help for longer.'],
+    ['保险是帮助人的事业，你的使命感能让客户感受到真诚。','Insurance is a helping profession, and your sense of mission makes clients feel your sincerity.']],
+};
+// Zodiac: key=en name -> [element, strength zh/en, watch+tip zh/en, industry link zh/en]
+const ZD = {
+ Aries:['E',['行动力强，敢冲敢试。','Action-oriented and unafraid to try.'],['有点急性子。小建议：做重要决定前先停三秒。','A little impatient. Tip: pause three seconds before big decisions.'],['敢开口约见新客户，不怕被拒绝。','You dare to ask for meetings and are not afraid of a "no".']],
+ Taurus:['C',['稳重可靠，重视承诺。','Steady and dependable, you honour commitments.'],['有点固执。小建议：多听不同的意见。','Can be stubborn. Tip: listen to other views.'],['客户觉得你靠谱，愿意长期合作。','Clients find you trustworthy and stay with you.']],
+ Gemini:['O',['反应快，爱沟通。','Quick-witted and a natural communicator.'],['兴趣多，容易分心。小建议：一次专注一件事。','Many interests, easily distracted. Tip: focus on one thing at a time.'],['能和各种人聊得来，话题多，容易打开话匣子。','You talk easily with anyone and always have a topic.']],
+ Cancer:['ES',['顾家、体贴，重感情。','Family-minded, caring and warm.'],['比较敏感，容易想太多。小建议：被拒绝时提醒自己，那是对事，不是对人。','Sensitive and prone to overthinking. Tip: a "no" is about the offer, not about you.'],['对家庭话题特别有共鸣，客户觉得被理解。','You connect deeply on family topics, so clients feel understood.']],
+ Leo:['E',['自信大方，有领导魅力。','Confident and charismatic.'],['有些在意面子。小建议：多请教别人，谦虚会让你更有魅力。','You care about image. Tip: ask for advice; humility adds to your charm.'],['在人前有说服力，适合做分享和带团队。','Persuasive in front of people, suited to talks and leading a team.']],
+ Virgo:['C',['细心严谨，追求完美。','Careful, precise and quality-minded.'],['对自己和别人比较挑剔。小建议：先完成，再追求完美。','Picky with yourself and others. Tip: finish first, polish later.'],['保单的细节和客户的需要，你都能照顾周全。','You cover both policy details and client needs thoroughly.']],
+ Libra:['O',['公正平衡，善于协调。','Fair-minded and a natural mediator.'],['做决定时容易犹豫。小建议：给自己设定决定的期限。','Can hesitate on decisions. Tip: set a deadline to decide.'],['能平衡客户的预算与需求，给出合适的方案。','You balance a client\'s budget and needs to find the right plan.']],
+ Scorpio:['ES',['专注深入，意志坚定。','Focused, determined and deep.'],['不太容易对人敞开。小建议：多分享一点，让人更容易靠近你。','Slow to open up. Tip: share a little more so people can get close.'],['抓得住重点，坚持跟进，不轻易放弃客户。','You find the key point and keep following up.']],
+ Sagittarius:['E',['乐观开朗，爱探索。','Optimistic and adventurous.'],['有时说话太直。小建议：开口前先想想对方的感受。','Sometimes too blunt. Tip: think how it lands before you speak.'],['满满的正能量带动气氛，客户喜欢和你聊。','Your positive energy lifts the mood and clients enjoy talking with you.']],
+ Capricorn:['C',['有耐心、有毅力，步步为营。','Patient and persistent, one steady step at a time.'],['对自己要求很严，爱扛责任。小建议：别忘了适度休息。','Hard on yourself and quick to shoulder everything. Tip: schedule rest.'],['长期目标感强，适合稳扎稳打的长期经营。','Strong long-term focus, perfect for steady, lasting work.']],
+ Aquarius:['O',['想法独特，重视自由。','Original thinker who values freedom.'],['有时显得有点疏离。小建议：多主动问候别人。','Can seem distant. Tip: reach out first.'],['用有创意的方式让保障更容易被理解，适合经营新媒体。','Creative ways to make protection easy to grasp, ideal for social media.']],
+ Pisces:['ES',['感受力强，富有同理心。','Sensitive and full of empathy.'],['容易被别人的情绪影响。小建议：建立自己的减压方式。','You absorb others\' moods. Tip: build your own way to reset.'],['能体会客户的担忧，让人觉得被理解。','You sense clients\' worries and make them feel understood.']],
+};
+const LP_KEY={1:'E',2:'A',3:'E',4:'C',5:'O',6:'A',7:'O',8:'C',9:'A'};
+
+/* ===== birthday engine (pure functions, offline, no AI) ===== */
+function lifePath(d,m,y){ // birthday number 1-9: add every digit of the full birth date, repeat until one digit
+  let n=[...(''+d+m+y)].reduce((a,c)=>a+(+c),0);
+  while(n>9) n=[...(''+n)].reduce((a,c)=>a+(+c),0);
+  return n;
+}
+function zodiacOf(m,d){
+  if((m===12&&d>=22)||(m===1&&d<20)) return ZODIAC[0];
+  let pick=ZODIAC[0];
+  for(const z of ZODIAC){ if(m>z[2]||(m===z[2]&&d>=z[3])) pick=z; }
+  return pick;
+}
+function analyze(s){
+  const z=zodiacOf(+s.m,+s.d);
+  return {name:s.name.trim(),lp:lifePath(+s.d,+s.m,+s.y),z,disc:s.disc,mbti:s.mbti};
+}
+function buildReport(a,lang){
+  const L=lang==='zh'?0:1, p=pair=>pair[L];
+  const lp=LP[a.lp], zd=ZD[a.z[1]];
+  const lpTitle=lp[L], zName=a.z[L];
+  const ds=a.disc&&DISC[a.disc], mb=/^[EI][NS][TF][JP]$/.test(a.mbti||'')?a.mbti:'';
+  // personality
+  const personality=[p([lp[2],lp[3]]), p([a.z[4],a.z[5]])];
+  // strengths
+  const strengths=[p(lp[4]),p(lp[5]),p(zd[1])];
+  const dot=L?'.':'。';
+  if(ds) strengths[0]=strengths[0].replace(/[。.]$/,'')+(L?'; ':'，')+p(ds.c)+dot;
+  if(mb){ const bits=L?`${MB[mb[1]][1]}, ${MB[mb[2]][1]}`:`${MB[mb[1]][0]}、${MB[mb[2]][0]}`;
+    strengths[1]=strengths[1].replace(/[。.]$/,'')+(L?` (${mb}: ${bits}).`:`（${mb}：${bits}）。`); }
+  // watch-outs (positive framing)
+  const watch=[p(lp[6]),p(zd[2])];
+  const style=[]; if(ds) style.push(`DISC ${p([ds.zh,ds.en])} · ${p(ds.d)}. ${p(ds.tip)}`); if(mb) style.push(`MBTI ${mb}`);
+  // how it plays out in our industry
+  const links=[
+    [L?`Number ${a.lp} with clients`:`${a.lp} 号人见客户`,p(lp[7])],
+    [L?`${zName} style`:`${zName}的风格`,p(zd[3])],
+  ];
+  if(ds) links.push([L?'Your DISC':'你的 DISC 沟通',p(ds.d)+(L?'. ':'。')+p(ds.tip)]);
+  if(mb) links.push([L?'Your MBTI':'你的 MBTI',(L?`${mb}: `:`${mb}：`)+(L?`${MB[mb[1]][1]}, ${MB[mb[2]][1]}, ${MB[mb[3]][1]}.`:`${MB[mb[1]][0]}、${MB[mb[2]][0]}、${MB[mb[3]][0]}。`)]);
+  // TIPS: fixed facts + personal tail (T,I from life path; P,S from zodiac element)
+  const k1=LP_KEY[a.lp], k2=zd[0], tail=(k,tr)=>' '+TIP_TAIL[k][tr][L];
+  const tips=[
+    ['T',L?'Time autonomy':'时间自主',(L?'You design your own schedule and client time.':'自己安排工作节奏与见客时间。')+tail('T',k1)],
+    ['I',L?'Income':'收入',(L?'155% commission + RM10K bridging income; RM1,000 new-agent activation reward.':'155% 佣金 + RM10K bridging income；RM1,000 新人激活奖励。')+tail('I',k1)],
+    ['P',L?'Promotion':'晋升',(L?'18-month PRUVenture Elite training, a path to PRUManager.':'PRUVenture Elite 18 个月培训，路径通往 PRUManager。')+tail('P',k2)],
+    ['S',L?'Significance':'成就感',(L?'Every case you close protects the foundation of a family.':'每一个成交，都是保护了一个家庭的根基。')+tail('S',k2)],
+  ];
+  return {
+    name:a.name, lp:a.lp, lang, tag:L?`${zName} · Number ${a.lp}`:`${zName} · ${a.lp} 号人`, title:lpTitle,
+    personality, strengths, watch, style, links, tips,
+    t:{ app:L?'Million Angel · Birthday Decoder':'百万天使 · 生日解码', lpl:L?'Birthday Number':'生日数字',
+        h0:L?'Your personality':'你的性格', h1:L?'Your Top 3 Strengths':'你的 3 大优势', h2:L?'Growth Notes':'需要留意的地方',
+        h3:L?'How your traits work in our industry':'你的特质，在我们行业怎么用', h4:L?'TIPS: what this career gives you':'TIPS：这份事业给你的',
+        cta:L?'Want to know more? Book a 1-on-1 or join our Saturday career sharing session.':'想了解更多？预约 1 对 1 或报名星期六事业分享会',
+        wa:'WhatsApp 019-778 7031', sig:'Jeff Lee | 保险杰夫 · 101 GROUP',
+        disc:L?'A fun reading based on star sign and birthday number, for conversation only. Not a hiring decision or professional psychological assessment.':'本报告为基于星座与生日数字的趣味性格解读，仅作对话参考，不作为任何招聘或专业心理评估依据。'},
+  };
+}
+
+/* ===== canvas renderer (PNG 1080x1350, PDF A4) — no libraries ===== */
+const FONT='"Times New Roman","Songti SC","Noto Serif SC","STSong",SimSun,serif';
+const C={red:'#D3222E',redD:'#9C1820',gold:'#F2C14E',ink:'#2A1A10',bg:'#FBF3F1',mut:'#7A6159',card:'rgba(255,255,255,.78)',line:'rgba(211,34,46,.16)'};
+let _angelImg=null,_logoImg=undefined;
+function loadImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src;});}
+async function getAngel(){ if(!_angelImg) _angelImg=await loadImg('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(ANGEL_RAW)); return _angelImg; }
+async function getLogo(){ if(_logoImg===undefined) _logoImg=await loadImg('assets/logo-101.png'); return _logoImg; }
+function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function wrap(c,text,maxW){
+  const toks=text.match(/[　-鿿＀-￯]|[^\s　-鿿＀-￯]+|\s+/g)||[]; const lines=[]; let cur='';
+  for(const t of toks){ const test=cur+t; if(c.measureText(test).width>maxW&&cur.trim()){ lines.push(cur.trim()); cur=t.trim()?t:''; } else cur=test; }
+  if(cur.trim()) lines.push(cur.trim()); return lines;
+}
+function layout(c,r,draw,W,imgs){
+  const P=56, IW=W-2*P; let y=44;
+  const txt=(s,x,yy,font,col,al)=>{c.font=font;c.fillStyle=col;c.textAlign=al||'left';c.fillText(s,x,yy);};
+  // ---- header
+  if(draw){
+    const h=232,w=h*80/108; if(imgs.angel) c.drawImage(imgs.angel,P-6,y+2,w,h);
+    if(imgs.logo){ const lh=62,lw=imgs.logo.width/imgs.logo.height*lh; c.save(); rrect(c,P+w+14,y,lw,lh,10); c.clip(); c.drawImage(imgs.logo,P+w+14,y,lw,lh); c.restore(); }
+    txt(r.t.app,P+w+14,y+(imgs.logo?96:44),`600 24px ${FONT}`,C.red);
+    c.font=`bold 56px ${FONT}`; let nm=r.name; while(c.measureText(nm).width>470&&nm.length>2) nm=nm.slice(0,-1); if(nm!==r.name) nm+='…';
+    txt(nm,P+w+14,y+(imgs.logo?156:112),`bold 56px ${FONT}`,C.ink);
+    c.font=`bold 26px ${FONT}`; const tw=c.measureText(r.tag).width+44, py=y+(imgs.logo?178:140);
+    c.fillStyle=C.red; rrect(c,P+w+14,py,tw,46,23); c.fill(); txt(r.tag,P+w+14+22,py+33,`bold 26px ${FONT}`,'#fff');
+    const cx=W-P-92, cy=y+118, rad=78;
+    c.lineWidth=18; c.strokeStyle='rgba(211,34,46,.16)'; c.beginPath(); c.arc(cx,cy,rad,0,Math.PI*2); c.stroke();
+    c.strokeStyle=C.red; c.lineCap='round'; c.beginPath(); c.arc(cx,cy,rad,0,Math.PI*2); c.stroke();
+    txt(String(r.lp),cx,cy+20,`bold 64px ${FONT}`,C.ink,'center'); txt(r.t.lpl,cx,cy+rad+44,`22px ${FONT}`,C.mut,'center');
+  }
+  y+=252;
+  const section=(title,items,kind)=>{
+    c.font=`23px ${FONT}`; const lh=31, bw=IW-2*28-(kind==='tip'?52:30);
+    const blocks=items.map(it=>wrap(c,kind==='tip'?it[1]+'  '+it[2]:it,bw));
+    let h=24+44+blocks.reduce((s,b)=>s+b.length*lh+10,0)+0+6;
+    if(draw){
+      c.fillStyle=C.card; rrect(c,P,y,IW,h,22); c.fill(); c.strokeStyle=C.line; c.lineWidth=1.5; c.stroke();
+      c.fillStyle=C.red; rrect(c,P+28,y+26,6,28,3); c.fill();
+      txt(title,P+46,y+50,`bold 29px ${FONT}`,C.ink);
+    }
+    let yy=y+24+44+22;
+    blocks.forEach((b,i)=>{
+      if(draw){
+        if(kind==='tip'){ c.fillStyle=C.red; c.beginPath(); c.arc(P+28+18,yy-8+4,19,0,7); c.fill(); txt(items[i][0],P+28+18,yy+4,`bold 22px ${FONT}`,'#fff','center'); }
+        else { c.fillStyle=kind==='watch'?C.gold:C.red; c.beginPath(); c.arc(P+28+8,yy-8,6,0,7); c.fill(); }
+        b.forEach((ln,j)=>{ if(kind==='tip'&&j===0){ const lab=items[i][1]+'  '; c.font=`bold 23px ${FONT}`; const lw=c.measureText(lab).width; txt(lab.trim(),P+28+52,yy+j*lh,`bold 23px ${FONT}`,C.redD); c.font=`23px ${FONT}`; txt(ln.slice(items[i][1].length).trim(),P+28+52+lw,yy+j*lh,`23px ${FONT}`,C.ink); } else txt(ln,P+28+(kind==='tip'?52:30),yy+j*lh,`23px ${FONT}`,C.ink); });
+      }
+      yy+=b.length*lh+10;
+    });
+    y+=h+14;
+  };
+  section(r.t.h0,r.personality,'str');
+  section(r.t.h1,r.strengths,'str');
+  section(r.t.h2,r.watch,'watch');
+  if(r.style.length||r.note){
+    c.font=`21px ${FONT}`; const ls=wrap(c,r.style.concat(r.note?[r.note]:[]).join('   '),IW-56);
+    if(draw){ ls.forEach((l,i)=>txt(l,P+28,y+22+i*28,`italic 21px ${FONT}`,C.mut)); }
+    y+=ls.length*28+22;
+  }
+  section(r.t.h3,r.links.map((x,i)=>[String(i+1),x[0],x[1]]),'tip');
+  section(r.t.h4,r.tips,'tip');
+  // CTA
+  c.font=`bold 24px ${FONT}`; const cl=wrap(c,r.t.cta,IW-60); const ch=24+cl.length*32+54;
+  if(draw){ c.fillStyle=C.red; rrect(c,P,y,IW,ch,22); c.fill(); cl.forEach((l,i)=>txt(l,P+30,y+42+i*32,`bold 24px ${FONT}`,'#fff'));
+    c.fillStyle='#fff'; rrect(c,P+30,y+ch-58,300,40,20); c.fill(); txt(r.t.wa,P+30+150,y+ch-30,`bold 22px ${FONT}`,C.red,'center'); }
+  y+=ch+18;
+  if(draw) txt(r.t.sig,W/2,y+10,`bold 26px ${FONT}`,C.ink,'center');
+  y+=42; c.font=`17px ${FONT}`; const dl=wrap(c,r.t.disc,IW-40);
+  if(draw) dl.forEach((l,i)=>txt(l,W/2,y+i*23,`17px ${FONT}`,C.mut,'center'));
+  y+=dl.length*23+14; return y;
+}
+async function renderCanvas(r,W,H){
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=H; const c=cv.getContext('2d');
+  c.fillStyle=C.bg; c.fillRect(0,0,W,H);
+  c.fillStyle='rgba(242,193,78,.28)'; c.beginPath(); c.arc(W-60,120,230,0,7); c.fill();
+  c.fillStyle='rgba(211,34,46,.09)'; c.beginPath(); c.arc(40,H-160,300,0,7); c.fill();
+  try{ await document.fonts.ready; }catch(e){}
+  const imgs={angel:await getAngel(),logo:await getLogo()};
+  const total=layout(c,r,false,1080,imgs); const avail=Math.min(H,1350)-0; const s=Math.min(1,avail/total);
+  c.save(); const oy=(H-Math.min(H,1350))/2; c.translate((W-1080*s)/2,oy); c.scale(s,s); layout(c,r,true,1080,imgs); c.restore();
+  return cv;
+}
+const canvasToBlob=(cv,type,q)=>new Promise(r=>cv.toBlob(r,type,q));
+async function makePNG(r){ return canvasToBlob(await renderCanvas(r,1080,1350),'image/png'); }
+async function makePDF(r){ // single-page A4, one embedded JPEG, hand-written PDF (no library)
+  const cv=await renderCanvas(r,1080,1527); const blob=await canvasToBlob(cv,'image/jpeg',.92);
+  const jpg=new Uint8Array(await blob.arrayBuffer()); const enc=new TextEncoder(); const parts=[]; const off=[]; let len=0;
+  const add=b=>{ if(typeof b==='string') b=enc.encode(b); parts.push(b); len+=b.length; };
+  add('%PDF-1.4\n'); const obj=(n,body)=>{ off[n]=len; add(n+' 0 obj\n'+body+'\nendobj\n'); };
+  obj(1,'<</Type/Catalog/Pages 2 0 R>>'); obj(2,'<</Type/Pages/Kids[3 0 R]/Count 1>>');
+  obj(3,'<</Type/Page/Parent 2 0 R/MediaBox[0 0 595.28 841.89]/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>');
+  off[4]=len; add(`4 0 obj\n<</Type/XObject/Subtype/Image/Width 1080/Height 1527/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${jpg.length}>>\nstream\n`); add(jpg); add('\nendstream\nendobj\n');
+  const cs='q 595.28 0 0 841.89 0 0 cm /Im0 Do Q'; obj(5,`<</Length ${cs.length}>>\nstream\n${cs}\nendstream`);
+  const xr=len; let x='xref\n0 6\n0000000000 65535 f \n'; for(let i=1;i<=5;i++) x+=String(off[i]).padStart(10,'0')+' 00000 n \n';
+  add(x+`trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${xr}\n%%EOF`);
+  return new Blob(parts,{type:'application/pdf'});
+}
+
+/* ===== UI ===== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let lang=ls.get('td_lang')||((navigator.language||'').toLowerCase().startsWith('zh')?'zh':'en');
+const t=(zh,en)=>lang==='zh'?zh:en;
+const IC={
+ shield:'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+ clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+ trend:'<path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/>',
+ award:'<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>',
+ heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/>',
+ dl:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>',
+ share:'<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/>',
+ wa:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+ lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+ check:'<path d="M20 6 9 17l-5-5"/>',
+ globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+ spark:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/>',
+ users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+ bulb:'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+ arrow:'<path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>',
+ back:'<path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>',
+};
+const ico=(n,s=20)=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+const S={step:0,name:'',d:'',m:'',y:'',disc:'',mbti:'',
+         lead:{name:'',wa:'',school:'',grad:'',pv:'yes',consent:false},leadDone:false,report:null,adminOK:false,adminTab:'leads'};
+/* ---- IndexedDB ---- */
+let _db; const db=()=>_db||(_db=new Promise((res,rej)=>{const q=indexedDB.open('td-db',1);q.onupgradeneeded=()=>{const d=q.result;d.createObjectStore('leads',{keyPath:'id',autoIncrement:true});d.createObjectStore('kv',{keyPath:'k'});};q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error);}));
+const tx=async(st,mode,fn)=>{const d=await db();return new Promise((res,rej)=>{const tr=d.transaction(st,mode);const s=tr.objectStore(st);const r=fn(s);tr.oncomplete=()=>res(r&&r.result);tr.onerror=()=>rej(tr.error);});};
+const kvGet=k=>tx('kv','readonly',s=>s.get(k)).then(r=>r&&r.v);
+const kvSet=(k,v)=>tx('kv','readwrite',s=>s.put({k,v}));
+const leadAdd=o=>tx('leads','readwrite',s=>s.add(o));
+const leadPut=o=>tx('leads','readwrite',s=>s.put(o));
+const leadAll=()=>tx('leads','readonly',s=>s.getAll()).then(r=>r||[]);
+const leadClear=()=>tx('leads','readwrite',s=>s.clear());
+const hashPin=p=>{let h=5381;for(const c of 'td:'+p)h=((h<<5)+h+c.charCodeAt(0))>>>0;return String(h);};
+/* ---- shell ---- */
+function chrome(inner){
+  return `<header class="top"><div class="brand"><img class="logo" src="assets/logo-101.png" alt="101 GROUP" onerror="this.remove()"><span class="bname">${t('百万天使 · 天赋解码','Million Angel · Talent Decoder')}</span></div>
+  <button class="lang" data-act="lang" aria-label="language">${ico('globe',18)}<span class="${lang==='zh'?'on':''}">中</span>|<span class="${lang==='en'?'on':''}">EN</span></button></header>
+  <main>${inner}</main>
+  <footer class="foot"><span>Jeff Lee | 保险杰夫 · 101 GROUP</span><a href="#/admin" data-act="admin" class="adm">${ico('lock',14)}Admin</a></footer>`;
+}
+function setHTML(h){ $('#app').innerHTML=chrome(h); }
+function angelHTML(cls=''){ return `<div class="angel ${cls}">${ANGEL_ANIM}</div>`; }
+/* ---- screens ---- */
+function vWelcome(){
+  setHTML(`<section class="glass hero">${angelHTML('big')}<h1>${t('你的天赋，<br>值得被看见','Your talents<br>deserve to be seen')}</h1>
+  <p class="lead">${t('只需要名字和生日，马上生成你的专属报告。','Just your name and birthday, and your personal report is ready.')}</p>
+  <button class="btn" data-act="start">${t('开始解码','Start decoding')} ${ico('arrow',18)}</button>
+  <p class="small">${t('资料只保存在这台设备，不会上传。','Your data stays on this device. Nothing is uploaded.')}</p></section>`);
+}
+function bar(p){ return `<div class="prog" role="progressbar" aria-valuenow="${p}"><i style="width:${p}%"></i></div>`; }
+function vProfile(){
+  const days=Array.from({length:31},(_,i)=>i+1), ms=Array.from({length:12},(_,i)=>i+1), yrs=Array.from({length:40},(_,i)=>2012-i);
+  const sel=(id,arr,val,ph)=>`<select id="${id}" data-f="${id}"><option value="">${ph}</option>${arr.map(v=>`<option ${String(v)===String(val)?'selected':''}>${v}</option>`).join('')}</select>`;
+  setHTML(`<section class="glass"><div class="mini">${angelHTML('mid')}<div><h2 style="margin:0">${t('用生日，解码你的天赋','Decode your talents from your birthday')}</h2><p class="small" style="margin:4px 0 0">${t('只需要名字和生日，几秒钟生成专属报告。','Just your name and birthday. Your personal report in seconds.')}</p></div></div>
+  <label class="fl">${t('名字（昵称即可）','Name (a nickname is fine)')}<input data-f="name" value="${esc(S.name)}" autocomplete="off" maxlength="40"></label>
+  <div class="fl">${t('生日（日 / 月 / 年）','Birthday (D / M / Y)')}<div class="row3">${sel('d',days,S.d,t('日','Day'))}${sel('m',ms,S.m,t('月','Month'))}${sel('y',yrs,S.y,t('年','Year'))}</div></div>
+  <h2 class="sub">${t('知道的话再选','If you know them')} <small>${t('选填，不知道就跳过','optional, skip if unsure')}</small></h2>
+  <div class="row2"><label class="fl">DISC<select data-f="disc"><option value="">${t('不知道','I don\'t know')}</option>${Object.keys(DISC).map(k=>`<option value="${k}" ${S.disc===k?'selected':''}>${lang==='zh'?DISC[k].zh:DISC[k].en}</option>`).join('')}</select></label>
+  <label class="fl">MBTI<select data-f="mbti"><option value="">${t('不知道','I don\'t know')}</option>${MBTI_TYPES.map(m=>`<option ${S.mbti===m?'selected':''}>${m}</option>`).join('')}</select></label></div>
+  <div class="actions"><button class="btn ghost" data-act="back">${ico('back',18)}</button><button class="btn" data-act="go">${ico('spark',18)} ${t('生成我的报告','Get my report')}</button></div><p class="err" id="err"></p></section>`);
+}
+function ringSVG(fit){ const r=54,c=2*Math.PI*r; return `<svg class="ring" viewBox="0 0 140 140"><circle cx="70" cy="70" r="${r}" class="rb"/><circle cx="70" cy="70" r="${r}" class="rf" stroke-dasharray="${c}" stroke-dashoffset="${c}" data-c="${c}" data-fit="${fit}" transform="rotate(-90 70 70)"/><text x="70" y="80" text-anchor="middle" class="rn" id="rn">0</text></svg>`; }
+function reportHTML(r){
+  const li=a=>a.map(x=>`<li>${esc(x)}</li>`).join('');
+  const tipIc=['clock','trend','award','heart'];
+  return `<article class="glass report" id="report">
+   <div class="rh">${angelHTML('mid')}<div class="rmeta"><small>${r.t.app}</small><h2 class="rname">${esc(r.name)}</h2><span class="pill">${esc(r.tag)}</span></div><div class="ringw"><div class="lpb"><b>${r.lp}</b></div><small>${r.t.lpl}</small></div></div>
+   <h3><i></i>${r.t.h0}</h3><ul class="dots">${li(r.personality)}</ul>
+   <h3><i></i>${r.t.h1}</h3><ul class="dots">${li(r.strengths)}</ul>
+   <h3><i></i>${r.t.h2}</h3><ul class="dots gold">${li(r.watch)}</ul>
+   ${r.style.length?`<p class="style">${esc(r.style.join('  '))}</p>`:''}
+   <h3><i></i>${r.t.h3}</h3>
+   <div class="tips">${r.links.map((x,i)=>`<div class="tip"><span class="tb">${i+1}</span><div><b>${x[0]}</b><p>${x[1]}</p></div></div>`).join('')}</div>
+   <h3><i></i>${r.t.h4}</h3>
+   <div class="tips">${r.tips.map((x,i)=>`<div class="tip"><span class="tb">${ico(tipIc[i],20)}</span><div><b>${x[0]} · ${x[1]}</b><p>${x[2]}</p></div></div>`).join('')}</div>
+   <div class="cta"><p>${r.t.cta}</p><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/60197787031?text=${encodeURIComponent((lang==='zh'?'你好 Jeff，我是 ':'Hi Jeff, I\'m ')+r.name+(lang==='zh'?'，我刚做完生日解码，想了解更多。':', I just did the Birthday Decoder and would like to know more.'))}">${ico('wa',18)} ${r.t.wa}</a></div>
+   <p class="sig">${r.t.sig}</p><p class="disc">${r.t.disc}</p></article>`;
+}
+function vReport(){
+  const a=S.report, r=buildReport(a,lang);
+  const L=S.lead; if(!L.name) L.name=a.name;
+  setHTML(`<div class="rwrap">${reportHTML(r)}<aside>
+   <div class="glass acts"><button class="btn" data-act="png">${ico('dl',18)} PNG</button><button class="btn" data-act="pdf">${ico('dl',18)} PDF</button><button class="btn red2" data-act="share">${ico('share',18)} ${t('分享','Share')}</button><button class="btn ghost" data-act="redo">${t('重新开始','Start over')}</button></div>
+   <form class="glass lead" id="lead" novalidate><h2>${ico('users',22)} ${t('想了解 PRUVenture？','Curious about PRUVenture?')} <small>${t('选填','optional')}</small></h2>
+    ${S.leadDone?`<p class="ok">${ico('check',18)} ${t('已收到，谢谢！Jeff 会联系你。','Received, thank you! Jeff will be in touch.')}</p>${S.leadWA?`<a class="btn wa" target="_blank" rel="noopener" href="${S.leadWA}">${ico('wa',18)} ${t('用 WhatsApp 发给 Jeff','Send to Jeff on WhatsApp')}</a>`:''}`:`
+    <label class="fl">${t('名字','Name')}<input data-l="name" value="${esc(L.name)}" maxlength="40"></label>
+    <label class="fl">WhatsApp<input data-l="wa" inputmode="tel" placeholder="01x-xxx xxxx" value="${esc(L.wa)}" maxlength="20"></label>
+    <label class="fl">${t('学校 / 科系','School / Major')}<input data-l="school" value="${esc(L.school)}" maxlength="60"></label>
+    <label class="fl">${t('毕业年份','Graduation year')}<input data-l="grad" inputmode="numeric" placeholder="2027" value="${esc(L.grad)}" maxlength="4"></label>
+    <div class="fl">${t('是否想了解 PRUVenture？','Want to learn about PRUVenture?')}<div class="seg">${[['yes',t('想了解','Yes')],['maybe',t('再看看','Maybe')],['no',t('暂不需要','Not now')]].map(o=>`<button type="button" class="${L.pv===o[0]?'sel':''}" data-pv="${o[0]}">${o[1]}</button>`).join('')}</div></div>
+    <label class="chk"><input type="checkbox" data-l="consent" ${L.consent?'checked':''}><span>${t('我同意 Jeff Lee / 101 GROUP 依据马来西亚个人资料保护法令（PDPA 2010）收集并使用我提供的资料，用于联系我了解保险事业机会。我可随时要求删除。','I consent to Jeff Lee / 101 GROUP collecting and using the details I provide under Malaysia\'s PDPA 2010 to contact me about career opportunities. I may ask for deletion at any time.')}</span></label>
+    <button type="button" class="btn" id="lsub" ${L.consent?'':'disabled'} data-act="lead">${t('提交','Submit')}</button><p class="err" id="lerr"></p>`}
+   </form></aside></div>`);
+  
+}
+function animateRing(){
+  const f=document.querySelector('.rf'); if(!f) return; const fit=+f.dataset.fit,c=+f.dataset.c,n=$('#rn'); const t0=performance.now();
+  const step=now=>{ const k=Math.min(1,(now-t0)/1100), e=1-Math.pow(1-k,3); f.setAttribute('stroke-dashoffset',c*(1-fit/100*e)); n.textContent=Math.round(fit*e); if(k<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+/* ---- admin ---- */
+async function vAdmin(){
+  const pin=await kvGet('pin');
+  if(!S.adminOK){
+    setHTML(`<section class="glass narrow"><h2>${ico('lock',22)} Admin</h2><p class="small">${pin?t('请输入 4 位 PIN','Enter your 4-digit PIN'):t('首次使用：设定 4 位 PIN','First time: set a 4-digit PIN')}</p>
+    <input id="pin" class="pin" inputmode="numeric" maxlength="4" type="password" autocomplete="off"><button class="btn" data-act="pin">${t('确认','Confirm')}</button><p class="err" id="err"></p><a class="small" href="#/" data-act="home">← ${t('返回','Back')}</a></section>`);
+    return;
+  }
+  const rows=(await leadAll()).sort((a,b)=>b.id-a.id), booth=!!(await kvGet('booth'));
+  setHTML(`<section class="glass"><h2>Admin <small>${rows.length} ${t('位','leads')}</small></h2>
+   <label class="chk"><input type="checkbox" id="booth" ${booth?'checked':''}><span>${t('摊位模式（iPad 专用）：提交后只保存在本机；关闭时，提交后会多一个「用 WhatsApp 发给 Jeff」按钮。','Booth mode (iPad): leads are only saved on this device. When off, a "Send to Jeff on WhatsApp" button appears after submitting.')}</span></label>
+   <div class="actions wrapx"><button class="btn" data-act="csv">${ico('dl',18)} CSV</button><button class="btn ghost" data-act="chpin">${t('改 PIN','Change PIN')}</button><button class="btn ghost danger" data-act="wipe">${t('清空全部','Delete all')}</button><a class="btn ghost" href="#/" data-act="home">${t('返回','Back')}</a></div>
+   <div class="list">${rows.length?rows.map(r=>`<div class="lr"><div><b>${esc(r.name)}</b> <span class="tag">LP ${r.lp||''} ${esc(r.zodiac||'')}</span><br><small>${esc(r.wa)} · ${esc(r.school)} · ${esc(r.grad)} · PRUVenture: ${esc(r.pv)}</small><br><small>DISC ${esc(r.disc||'-')} · MBTI ${esc(r.mbti||'-')} · ${new Date(r.ts).toLocaleString()}</small></div><div class="gr">${['A','B','C'].map(g=>`<button class="${r.grade===g?'sel':''}" data-grade="${g}" data-id="${r.id}">${g}</button>`).join('')}</div></div>`).join(''):`<p class="small">${t('还没有名单','No leads yet')}</p>`}</div></section>`);
+}
+/* ---- actions ---- */
+const flash=(id,m)=>{const e=$('#'+id); if(e) e.textContent=m;};
+function validate1(){
+  if(!S.name.trim()) return t('请输入名字','Please enter your name');
+  if(!S.d||!S.m||!S.y) return t('请选择完整生日','Please choose your full birthday');
+  const dt=new Date(+S.y,+S.m-1,+S.d); if(dt.getMonth()!==+S.m-1) return t('这个日期不存在，请检查','That date does not exist');
+  return '';
+}
+function route(){
+  if(location.hash==='#/admin') return vAdmin();
+  S.adminOK=false;
+  ({0:vWelcome,1:vProfile,4:vReport})[S.step]();
+  window.scrollTo(0,0);
+}
+async function exportBlob(kind){
+  const r=buildReport(S.report,lang), fn=`MillionAngel-${S.report.name.replace(/[^\w一-鿿-]+/g,'_')}`;
+  const b=kind==='pdf'?await makePDF(r):await makePNG(r); return {b,name:fn+(kind==='pdf'?'.pdf':'.png')};
+}
+function saveBlob(b,name){ const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); }
+function toast(m){ let e=$('#toast'); if(!e){e=document.createElement('div');e.id='toast';document.body.appendChild(e);} e.textContent=m; e.className='show'; clearTimeout(toast.t); toast.t=setTimeout(()=>e.className='',2200); }
+async function csvExport(){
+  const rows=(await leadAll()).sort((a,b)=>a.id-b.id);
+  const H=['time','name','whatsapp','school_major','grad_year','pruventure','grade','zodiac','disc','mbti','life_path','pdpa_consent'];
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const lines=[H.join(',')].concat(rows.map(r=>[new Date(r.ts).toISOString(),r.name,r.wa,r.school,r.grad,r.pv,r.grade||'',r.zodiac,r.disc,r.mbti,r.lp,r.consent?'yes':'no'].map(q).join(',')));
+  saveBlob(new Blob(['﻿'+lines.join('\n')],{type:'text/csv'}),`leads-${new Date().toISOString().slice(0,10)}.csv`);
+}
+document.addEventListener('click',async e=>{
+  const g=e.target.closest('[data-act],[data-v],[data-disc],[data-pv],[data-grade]'); if(!g) return;
+  if(g.dataset.disc){ S.disc=S.disc===g.dataset.disc?'':g.dataset.disc; document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',c.dataset.disc===S.disc)); return; }
+  if(g.dataset.pv){ S.lead.pv=g.dataset.pv; document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('sel',b.dataset.pv===S.lead.pv)); return; }
+  if(g.dataset.grade){ const rows=await leadAll(); const r=rows.find(x=>x.id==g.dataset.id); r.grade=r.grade===g.dataset.grade?'':g.dataset.grade; await leadPut(r); return vAdmin(); }
+  const a=g.dataset.act;
+  if(a==='lang'){ lang=lang==='zh'?'en':'zh'; ls.set('td_lang',lang); document.documentElement.lang=lang; return route(); }
+  if(a==='start'){ S.step=1; return route(); }
+  if(a==='back'){ S.step=0; return route(); }
+  if(a==='go'){ const m=validate1(); if(m) return flash('err',m); S.report=analyze(S); S.step=4; S.leadDone=false; return route(); }
+  if(a==='redo'){ Object.assign(S,{step:1,name:'',d:'',m:'',y:'',disc:'',mbti:'',report:null,leadDone:false,lead:{name:'',wa:'',school:'',grad:'',pv:'yes',consent:false}}); return route(); }
+  if(a==='png'||a==='pdf'){ toast(t('生成中…','Rendering…')); const x=await exportBlob(a); saveBlob(x.b,x.name); return; }
+  if(a==='share'){ toast(t('生成中…','Rendering…')); const x=await exportBlob('png'); const f=new File([x.b],x.name,{type:'image/png'});
+    try{ if(navigator.canShare&&navigator.canShare({files:[f]})) await navigator.share({files:[f],title:t('我的天赋报告','My Talent Report'),text:t('我的百万天使天赋报告','My Million Angel Talent Report')}); else saveBlob(x.b,x.name); }catch(err){ if(err&&err.name!=='AbortError') saveBlob(x.b,x.name); } return; }
+  if(a==='lead'){ e.preventDefault(); const L=S.lead;
+    if(!L.consent) return flash('lerr',t('请先勾选同意','Please tick the consent box'));
+    if(!L.name.trim()) return flash('lerr',t('请输入名字','Please enter your name'));
+    if(L.wa.replace(/\D/g,'').length<9) return flash('lerr',t('请输入有效的 WhatsApp 号码','Please enter a valid WhatsApp number'));
+    const A=S.report; await leadAdd({ts:Date.now(),name:L.name.trim(),wa:L.wa.trim(),school:L.school.trim(),grad:L.grad.trim(),pv:L.pv,zodiac:A.z[1],disc:A.disc,mbti:A.mbti,lp:A.lp,consent:true,grade:''});
+    const booth=!!(await kvGet('booth')); S.leadDone=true;
+    S.leadWA=booth?'':'https://wa.me/60197787031?text='+encodeURIComponent(`Hi Jeff, I'm ${L.name.trim()} (${L.school.trim()}, ${L.grad.trim()}). Birthday Decoder (Number ${A.lp}, ${A.z[1]}). PRUVenture: ${L.pv}. WhatsApp: ${L.wa.trim()}. I agree to be contacted (PDPA).`);
+    return vReport(); }
+  if(a==='admin'||a==='home'){ /* hashchange handles */ if(a==='home'){ S.adminOK=false; } return; }
+  if(a==='pin'){ e.preventDefault(); const v=($('#pin').value||'').trim(); if(!/^\d{4}$/.test(v)) return flash('err',t('请输入 4 位数字','Enter 4 digits')); const cur=await kvGet('pin');
+    if(!cur){ await kvSet('pin',hashPin(v)); S.adminOK=true; return vAdmin(); } if(cur===hashPin(v)){ S.adminOK=true; return vAdmin(); } return flash('err',t('PIN 不对','Wrong PIN')); }
+  if(a==='csv') return csvExport();
+  if(a==='chpin'){ const v=prompt(t('输入新的 4 位 PIN','New 4-digit PIN')); if(v&&/^\d{4}$/.test(v)){ await kvSet('pin',hashPin(v)); toast(t('已更新','Updated')); } return; }
+  if(a==='wipe'){ if(confirm(t('确定清空全部名单？此操作无法还原。','Delete ALL leads? This cannot be undone.'))&&confirm(t('再确认一次：真的要全部删除吗？','Really delete everything?'))){ await leadClear(); return vAdmin(); } return; }
+});
+document.addEventListener('input',e=>{
+  const f=e.target.dataset;
+  if(f.f){ S[f.f]=e.target.value; }
+  if(f.l){ if(f.l==='consent'){ S.lead.consent=e.target.checked; const b=$('#lsub'); if(b) b.disabled=!S.lead.consent; } else S.lead[f.l]=e.target.value; }
+  if(e.target.id==='booth') kvSet('booth',e.target.checked);
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.id==='pin'){ e.preventDefault(); document.querySelector('[data-act=pin]').click(); } if(e.key==='Enter'&&e.target.closest&&e.target.closest('#lead')) e.preventDefault(); });
+window.addEventListener('hashchange',route);
+document.documentElement.lang=lang; route();
+if('serviceWorker' in navigator){
+  const had=!!navigator.serviceWorker.controller; let reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(had&&!reloaded&&S.step<2&&location.hash!=='#/admin'){ reloaded=true; location.reload(); } });
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+</script>
+</body>
+</html>
