@@ -767,7 +767,8 @@ function chrome(inner){
   <footer class="foot"><span>Jeff Lee | 保险杰夫 · 101 GROUP</span><a href="#/admin" data-act="admin" class="adm">${ico('lock',14)}Admin</a></footer>`;
 }
 function setHTML(h){ $('#app').innerHTML=chrome(h); }
-function rollHero(){ let k; do{ k=HERO_KEYS[Math.floor(Math.random()*HERO_KEYS.length)]; }while(k===S.hero&&HERO_KEYS.length>1); S.hero=k; return k; }
+const POOL=HERO_KEYS.filter(k=>k!=='bear'&&k!=='frog');
+function rollHero(){ let k; do{ k=POOL[Math.floor(Math.random()*POOL.length)]; }while(k===S.hero&&POOL.length>1); S.hero=k; return k; }
 function angelHTML(cls=''){ if(!S.hero) rollHero(); return `<div class="angel ${cls}"${cls==='big'?' data-act="roll" title="tap"':''}>${heroSVG(S.hero,{weapon:true})}</div>`; }
 /* ---- screens ---- */
 function vWelcome(){
