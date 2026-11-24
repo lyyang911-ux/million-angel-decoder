@@ -364,7 +364,7 @@ const C={red:'#B81C26',redD:'#8E1520',gold:'#B8913F',goldL:'#D9BE7C',ink:'#2A1A1
 let _angelImg=null,_logoImg=undefined;
 function loadImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src;});}
 async function getAngel(){ if(!_angelImg) _angelImg=await loadImg('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(ANGEL_RAW)); return _angelImg; }
-async function getLogo(){ if(_logoImg===undefined) _logoImg=await loadImg('assets/logo-101.png'); return _logoImg; }
+async function getLogo(){ if(_logoImg===undefined) _logoImg=await loadImg('assets/logo-st.png'); return _logoImg; }
 function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 function wrap(c,text,maxW){
   const toks=text.match(/[　-鿿＀-￯]|[^\s　-鿿＀-￯]+|\s+/g)||[]; const lines=[]; let cur='';
@@ -391,7 +391,7 @@ function layout(c,r,draw,W,imgs){
     const mx=bx+134,my=by+118; c.fillStyle=C.bg; c.beginPath(); c.arc(mx,my,92,0,7); c.fill(); c.strokeStyle=C.gold; c.lineWidth=4; c.stroke(); c.strokeStyle=C.goldL; c.lineWidth=1.5; c.beginPath(); c.arc(mx,my,84,0,7); c.stroke();
     if(imgs.angel){ const h=170,w=h*80/108; c.drawImage(imgs.angel,mx-w/2,my-h/2+6,w,h); }
     const tx=bx+256;
-    if(imgs.logo){ const lh=50,lw=imgs.logo.width/imgs.logo.height*lh; c.fillStyle=C.gold; c.fillRect(tx-2,by+24,lw+4,lh+4); c.drawImage(imgs.logo,tx,by+26,lw,lh); }
+    if(imgs.logo){ const lh=50,lw=imgs.logo.width/imgs.logo.height*lh; c.fillStyle='#fff'; c.fillRect(tx-3,by+23,lw+6,lh+6); c.drawImage(imgs.logo,tx,by+26,lw,lh); }
     c.save(); if('letterSpacing' in c) c.letterSpacing='3px'; txt(r.t.app.toUpperCase(),tx,by+104,`600 19px ${FONT}`,C.goldL); c.restore();
     c.font=`bold 58px ${FONT}`; let nm=r.name; while(c.measureText(nm).width>400&&nm.length>2) nm=nm.slice(0,-1); if(nm!==r.name) nm+='…';
     txt(nm,tx,by+165,`bold 58px ${FONT}`,'#FFF6DD');
@@ -514,7 +514,7 @@ const leadClear=()=>tx('leads','readwrite',s=>s.clear());
 const hashPin=p=>{let h=5381;for(const c of 'td:'+p)h=((h<<5)+h+c.charCodeAt(0))>>>0;return String(h);};
 /* ---- shell ---- */
 function chrome(inner){
-  return `<header class="top"><div class="brand"><img class="logo" src="assets/logo-101.png" alt="101 GROUP" onerror="this.remove()"><span class="bname">${t('百万天使 · 天赋解码','Million Angel · Talent Decoder')}</span></div>
+  return `<header class="top"><div class="brand"><img class="logo" src="assets/logo-st.png" alt="Success Team" onerror="this.remove()"><span class="bname">${t('百万天使 · 天赋解码','Million Angel · Talent Decoder')}</span></div>
   <button class="lang" data-act="lang" aria-label="language">${ico('globe',18)}<span class="${lang==='zh'?'on':''}">中</span>|<span class="${lang==='en'?'on':''}">EN</span></button></header>
   <main>${inner}</main>
   <footer class="foot"><span>Jeff Lee | 保险杰夫 · 101 GROUP</span><a href="#/admin" data-act="admin" class="adm">${ico('lock',14)}Admin</a></footer>`;
