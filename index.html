@@ -123,6 +123,41 @@ input:focus,select:focus{outline:2px solid var(--red);outline-offset:1px}
 .sales .pn.wn{background:#F9E7DE}.sales q{quotes:none;font-style:italic;color:var(--red-d)}.sales q:before{content:"“"}.sales q:after{content:"”"}
 .swrap{display:block}
 @media(min-width:820px){.swrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr);gap:18px;align-items:start}}
+
+/* ---- Apple taste: light glass over a bright photo-like backdrop ---- */
+:root{--f:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","PingFang SC","Hiragino Sans GB","Helvetica Neue",Helvetica,Arial,sans-serif;--glass:rgba(255,255,255,.56);--bd:rgba(255,255,255,.8);--r:26px;--bg:#FBF3F0;--mut:#6E5F5C;--ink:#241716;--ease:cubic-bezier(.2,.8,.2,1)}
+html{background:#FBF3F0}
+body{background:transparent;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:#FBF3F0 url(assets/bg.jpg) center top/cover no-repeat;transform:translateZ(0)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.08) 40%,rgba(255,255,255,.22));pointer-events:none}
+.blob{display:none}
+.top{position:sticky;top:0;z-index:20;margin:0 -16px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.7)}
+.logo{border-radius:10px}.bname{font-weight:600;letter-spacing:.01em}
+.lang{background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.85);box-shadow:0 1px 6px rgba(142,21,32,.08)}
+h1,h2,.rname{letter-spacing:-.025em;font-weight:700}h1{line-height:1.08}
+.glass,.report{background:var(--glass);border:1px solid rgba(255,255,255,.85);border-radius:var(--r);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 40px rgba(142,21,32,.10),0 2px 6px rgba(142,21,32,.05)}
+.report{outline:none;padding:10px}
+.rh{border-radius:20px;outline:none;border-bottom:0;background:linear-gradient(150deg,#B81C26,#8E1520);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 8px 22px rgba(142,21,32,.28)}
+.pn{background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.9);border-radius:20px;outline:none;box-shadow:inset 0 1px 0 #fff,0 4px 16px rgba(142,21,32,.06)}
+.report h3{font-weight:600;letter-spacing:.1em}.report h3:before,.report h3:after{height:1px;background:linear-gradient(90deg,transparent,var(--gold));opacity:.8}.report h3:after{background:linear-gradient(270deg,transparent,var(--gold))}
+.cta{border-radius:22px;outline:none;background:linear-gradient(150deg,#B81C26,#8E1520);box-shadow:0 10px 26px rgba(142,21,32,.28)}
+.tip{border-bottom-color:rgba(142,21,32,.12)}
+.mode{border:1px solid rgba(255,255,255,.9);outline:none;border-radius:22px;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:inset 0 1px 0 #fff,0 10px 30px rgba(142,21,32,.10);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.mode.dark{background:linear-gradient(150deg,#C21F2B,#8E1520);border-color:rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 12px 30px rgba(142,21,32,.30)}
+.mode:active,.btn:active,.dot:active,.chip:active{transform:scale(.97);transition-duration:.1s}
+.btn{border-radius:999px;background:linear-gradient(180deg,#C8222E,#A5181F);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 16px rgba(142,21,32,.28);font-weight:600;transition:transform .3s var(--ease)}
+.btn.ghost{background:rgba(255,255,255,.65);box-shadow:inset 0 1px 0 #fff;border:1px solid rgba(255,255,255,.9)}
+.btn.red2{background:linear-gradient(180deg,#3a2a28,#241716)}.btn.wa,.cta .btn.wa{background:#fff;color:var(--red-d)}
+input,select,.dot,.chip,.seg button,.gr button{border-radius:14px;border:1px solid rgba(142,21,32,.14);background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+input:focus,select:focus{outline:3px solid rgba(184,28,38,.22);outline-offset:0;border-color:var(--red)}
+.seg2{border:1px solid rgba(255,255,255,.9);border-radius:14px;background:rgba(255,255,255,.5)}.seg2 button{background:transparent}.seg2 .sel{background:linear-gradient(180deg,#C8222E,#A5181F);border-radius:12px}
+.dot.sel,.seg .sel,.gr .sel{background:linear-gradient(180deg,#C8222E,#A5181F);color:#fff;border-color:transparent}
+.chip.sel{background:rgba(184,28,38,.1);border-color:var(--red)}
+.sales .warn{border-radius:14px;border:1px solid rgba(184,145,63,.5);background:rgba(255,246,221,.8)}
+.sales .pn.wn{background:rgba(249,231,222,.75)}
+#toast{background:rgba(36,23,22,.82);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+@media(prefers-reduced-transparency:reduce){.glass,.report,.mode,.top{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
